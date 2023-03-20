@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!78 &1
+TagManager:
+  serializedVersion: 2
+  tags: []
+  layers:
+  - Default
+  - TransparentFX
+  - Ignore Raycast
+  - 
+  - Water
+  - UI
+  - World
+  - Entity
+  - Hitbox
+  - Hurtbox
+  - Interactable
+  - Interact
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  m_SortingLayers:
+  - name: Default
+    uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 65005521
+    locked: 0
+  - name: Object
+    uniqueID: 393830587
+    locked: 0
+  - name: World
+    uniqueID: 2611542359
+    locked: 0
+  - name: Entity
+    uniqueID: 135561617
+    locked: 0
+  - name: Foreground
+    uniqueID: 129280145
+    locked: 0
+  - name: VFX
+    uniqueID: 2361349905
+    locked: 0
+  - name: Waterline
+    uniqueID: 3704156135
+    locked: 0
+  - name: GUI
+    uniqueID: 3493387309
+    locked: 0
