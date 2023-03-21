@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buttonCount: 10
-  bufferFrames: 10
+  bufferFrames: 12
   bufferEnabled: 1
 --- !u!114 &3874427491364746950
 MonoBehaviour:
@@ -252,3 +252,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cam: {fileID: 0}
+  level: {fileID: 0}

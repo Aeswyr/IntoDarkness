@@ -8,7 +8,7 @@ public class WorldManager : NetworkSingleton<WorldManager>
     [Header("EnemyPrefabs")]
     [SerializeField] private List<GameObject> enemyPrefabs;
     
-    float spawnDelay = 10;
+    float spawnDelay = 5;
     float spawnTime;
 
     public void Start() {

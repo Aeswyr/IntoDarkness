@@ -68,6 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1030783516348868771}
   - component: {fileID: 7061316402069580559}
+  - component: {fileID: 5375201410334064612}
   - component: {fileID: 5159113292233600979}
   - component: {fileID: 5332741944164415385}
   - component: {fileID: 1872525756279842833}
@@ -97,6 +98,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4055707111191390364}
+  - {fileID: 1727821341385872083}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -119,6 +121,7 @@ MonoBehaviour:
   colCheck: {fileID: 1872525756279842833}
   sprite: {fileID: 4375919315086165391}
   animator: {fileID: -3843640825058986526}
+  stats: {fileID: 5375201410334064612}
   rollSpeed: 24
   rollCurve:
     serializedVersion: 2
@@ -197,6 +200,28 @@ MonoBehaviour:
   walljumpWindow: 0.1
   walljumpSpeed: 20
   walljumpDuration: 0.15
+  hitboxPrefab: {fileID: 1763554164472596795, guid: 9b0e6f2ca6216e74bbfcb13240af9f25, type: 3}
+  swordPrimary: {fileID: 11400000, guid: 6afd65f7e9dd9fa4bb379830eb6caa8c, type: 2}
+  swordSecondary: {fileID: 11400000, guid: 2be9fb6b38a5258498de3a7a2769092f, type: 2}
+--- !u!114 &5375201410334064612
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912926118970277985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d37035a6896ad8b4899836e04131c600, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  Ingenuity: 5
+  Might: 5
+  Vitality: 5
+  Endurance: 5
+  Awareness: 5
 --- !u!114 &5159113292233600979
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,3 +531,90 @@ MonoBehaviour:
   syncInterval: 0.1
   clientAuthority: 1
   animator: {fileID: -3843640825058986526}
+--- !u!1 &8356923935978808287
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1727821341385872083}
+  - component: {fileID: 538793755412427377}
+  - component: {fileID: 7879162300374653417}
+  m_Layer: 9
+  m_Name: Hurtbox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1727821341385872083
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8356923935978808287}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1030783516348868771}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &538793755412427377
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8356923935978808287}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1, y: 2}
+  m_EdgeRadius: 0
+--- !u!114 &7879162300374653417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8356923935978808287}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e5efe0ff7d4d694781aefe99476e299, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  owner: {fileID: 3912926118970277985}
+  action:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 5375201410334064612}
+        m_TargetAssemblyTypeName: StatController, Assembly-CSharp
+        m_MethodName: OnHit
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

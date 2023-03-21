@@ -10,6 +10,8 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private GroundedCheck colCheck;
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Animator animator;
+    [SerializeField] private StatController stats;
+    [SerializeField] private BoxCollider2D hurtbox;
 
     [Header("Action Data")]
     [SerializeField] private float rollSpeed;
@@ -23,9 +25,17 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float walljumpSpeed;
     [SerializeField] private float walljumpDuration;
 
+    [Header("Combat Data")]
+    [SerializeField] private GameObject hitboxPrefab;
+    private GameObject activeHitbox = null;
+    [SerializeField] private HitboxData swordPrimary;
+    [SerializeField] private HitboxData swordSecondary;
+
     private int facing = 1;
     private bool grounded = false;
     private bool acting = false;
+    private bool hitpaused = false;
+    private float hitpauseEnd;
     
     private bool m_hanging = false;
     private bool hanging {
@@ -67,6 +77,11 @@ public class PlayerController : NetworkBehaviour
     {
         if (!isLocalPlayer)
             return;
+
+        if (hitpaused && Time.time > hitpauseEnd) {
+            hitpaused = false;
+            animator.speed = 1;
+        }
 
         bool pGrounded = grounded;
         grounded = colCheck.CheckGrounded();
@@ -251,6 +266,51 @@ public class PlayerController : NetworkBehaviour
                     jump.ResetGravity();
                 break;
         }
+
+        DestroyActiveHitbox();
+    }
+
+    private void DestroyActiveHitbox() {
+        if (activeHitbox != null) {
+            Destroy(activeHitbox);
+            activeHitbox = null;
+        }
+    }
+
+    private void CreateActiveHitbox(int type) {
+        DestroyActiveHitbox();
+        void CreateHitbox(Vector3 position, Vector2 size, HitboxData data) {
+            activeHitbox = Instantiate(hitboxPrefab, position, Quaternion.identity);
+            HitboxController hitbox = activeHitbox.GetComponent<HitboxController>();
+            hitbox.InitializeHitbox(size, EntityTeam.PLAYER, data, stats);
+            activeHitbox.transform.SetParent(transform);
+        }
+        switch (type) {
+            case 0:
+                CreateHitbox(transform.position + 2 * facing * Vector3.right, new Vector2(4, 3), swordPrimary);
+                break;
+            case 1:
+                CreateHitbox(transform.position + 1.5f * facing * Vector3.right, new Vector2(3, 3), swordSecondary);
+                break;
+        }
+    }
+
+    [Command] public void DoHitstop(float duration) {
+        RecieveHitstop(duration);
+    }
+
+    [ClientRpc] private void RecieveHitstop(float duration) {
+        if (!isLocalPlayer)
+            return;
+        jump.Pause(Time.time + duration);
+        move.Pause(Time.time + duration);
+        animator.speed = 0;
+        hitpauseEnd = Time.time + duration;
+        hitpaused = true;
+    }
+
+    public void OnDie() {
+        VFXManager.Instance.SendFloatingText("* D E A D *", transform.position, Color.white);
     }
 
 //  commands and rpcs for attaching various particle effects to the player prefab. For unattached particles
@@ -267,5 +327,7 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc] private void RecieveAttachVFX(ParticleType type, Vector3 pos, bool flip) {
         VFXManager.Instance.CreateVFX(type, pos, flip);
     }
+
+
     
 }
