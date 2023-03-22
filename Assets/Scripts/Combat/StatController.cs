@@ -32,7 +32,7 @@ public class StatController : NetworkBehaviour
 
         health -= amt;
         {
-            float hitstopDuration = 1.1f;
+            float hitstopDuration = 0.1f;
             // hitstop on the target who was hit
             if (TryGetComponent(out EnemyController enemy)) {
                 enemy.DoHitstop(hitstopDuration);

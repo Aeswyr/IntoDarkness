@@ -10,7 +10,14 @@ public class EnemyController : NetworkBehaviour
         NetworkServer.Destroy(gameObject);
     }
 
-    [Command(requiresAuthority = false)] public void DoHitstop(float duration) {
+    public void DoHitstop(float duration) {
+        if (isServer) 
+            RecieveHitstop(duration);
+        else 
+            SendHitstop(duration);
+    }
+
+    [Command(requiresAuthority = false)] private void SendHitstop(float duration) {
         RecieveHitstop(duration);
     }
 

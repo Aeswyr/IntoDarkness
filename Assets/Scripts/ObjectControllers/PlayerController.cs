@@ -295,7 +295,14 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    [Command] public void DoHitstop(float duration) {
+    public void DoHitstop(float duration) {
+        if (isServer) 
+            RecieveHitstop(duration);
+        else 
+            SendHitstop(duration);
+    }
+
+    [Command] private void SendHitstop(float duration) {
         RecieveHitstop(duration);
     }
 
