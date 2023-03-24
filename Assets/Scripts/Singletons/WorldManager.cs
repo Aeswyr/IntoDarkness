@@ -8,6 +8,7 @@ public class WorldManager : NetworkSingleton<WorldManager>
     [Header("EnemyPrefabs")]
     [SerializeField] private List<GameObject> enemyPrefabs;
     
+    List<PlayerController> players = new List<PlayerController>();
     float spawnDelay = 5;
     float spawnTime;
 
@@ -32,6 +33,14 @@ public class WorldManager : NetworkSingleton<WorldManager>
             return;
 
         NetworkServer.Spawn(Instantiate(enemyPrefabs[(int)type], pos, Quaternion.identity));
+    }
+
+    public void AddPlayer(PlayerController player) {
+        players.Add(player);
+    }
+
+    public List<PlayerController> GetPlayers() {
+        return players;
     }
 }
 

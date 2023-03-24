@@ -13,8 +13,9 @@ public class StatController : NetworkBehaviour
 
     private int maxHealth;
     [SyncVar] private int health;
+    bool invuln;
 
-    void Start() {
+    void Awake() {
         maxHealth = Vitality * 2;
         health = maxHealth;
     }
@@ -28,7 +29,17 @@ public class StatController : NetworkBehaviour
         Color color = Color.red;
         if (data.IsHeal)
             color = Color.yellow;
+
+        if (!data.IsHeal && invuln) {
+
+            return;
+        }
+            
         VFXManager.Instance.SendFloatingText(amt.ToString(), transform.position + 2 * Vector3.up, color);
+        bool flip = false;
+        if (hit.GetOwner().TryGetComponent(out SpriteRenderer sprite))
+            flip = sprite.flipX;
+        VFXManager.Instance.SyncVFX(ParticleType.HITSPARK_DEFAULT, transform.position, flip);
 
         health -= amt;
         {
@@ -54,5 +65,9 @@ public class StatController : NetworkBehaviour
                 enemy.OnDie();
             }
         }
+    }
+
+    public void SetInvuln(bool state) {
+        invuln = state;
     }
 }

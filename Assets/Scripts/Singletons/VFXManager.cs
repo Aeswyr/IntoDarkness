@@ -15,7 +15,13 @@ public class VFXManager : NetworkSingleton<VFXManager>
     [Header("Floating Text")]
     [SerializeField] private GameObject textPrefab;
 
-    [Command(requiresAuthority = false)] public void SendVFX(ParticleType type, Vector3 pos, bool flip) {
+    public void SyncVFX(ParticleType type, Vector3 pos, bool flip) {
+        if (isServer)
+            RecieveVFX(type, pos, flip);
+        else
+            SendVFX(type, pos, flip);
+    }
+    [Command(requiresAuthority = false)] private void SendVFX(ParticleType type, Vector3 pos, bool flip) {
         RecieveVFX(type, pos, flip);
     }
 
@@ -36,7 +42,13 @@ public class VFXManager : NetworkSingleton<VFXManager>
         particle.GetComponent<SpriteRenderer>().flipX = flip;
     }
 
-    [Command(requiresAuthority = false)] public void SendPrefabVFX(ParticlePrefabType type, Vector3 pos) {
+    public void SyncPrefabVFX(ParticlePrefabType type, Vector3 pos) {
+        if (isServer)
+            RecievePrefabVFX(type, pos);
+        else
+            SendPrefabVFX(type, pos);
+    }
+    [Command(requiresAuthority = false)] private void SendPrefabVFX(ParticlePrefabType type, Vector3 pos) {
         RecievePrefabVFX(type, pos);
     }
 
@@ -71,7 +83,7 @@ public class VFXManager : NetworkSingleton<VFXManager>
 }
 
 public enum ParticleType {
-    DUST_SMALL, DUST_LARGE, DUST_LANDING,
+    DUST_SMALL, DUST_LARGE, DUST_LANDING, HITSPARK_DEFAULT
 }
 
 public enum ParticlePrefabType {

@@ -66,6 +66,8 @@ public class PlayerController : NetworkBehaviour
 
     private int weapon;
     void Start() {
+        WorldManager.Instance.AddPlayer(this);
+
         if (!isLocalPlayer)
             return;
 
@@ -87,7 +89,7 @@ public class PlayerController : NetworkBehaviour
         grounded = colCheck.CheckGrounded();
 
         if (!pGrounded && grounded) { //landing frame
-            VFXManager.Instance.SendVFX(ParticleType.DUST_LANDING, transform.position + 0.5f * Vector3.up, facing == -1);
+            VFXManager.Instance.SyncVFX(ParticleType.DUST_LANDING, transform.position + 0.5f * Vector3.up, facing == -1);
             
             animator.SetBool("grounded", grounded);
         } else if (pGrounded && !grounded) { // first airborne frame
@@ -103,7 +105,7 @@ public class PlayerController : NetworkBehaviour
             if (InputHandler.Instance.dir != 0)
                 facing = (int)InputHandler.Instance.dir;
             if (grounded)
-                VFXManager.Instance.SendVFX(ParticleType.DUST_SMALL, transform.position + new Vector3(-facing, 0.5f), facing == -1);
+                VFXManager.Instance.SyncVFX(ParticleType.DUST_SMALL, transform.position + new Vector3(-facing, 0.5f), facing == -1);
         } else if (!acting && Time.time > walljumpLockout && InputHandler.Instance.move.down) {
             move.UpdateMovement(InputHandler.Instance.dir);
             if (InputHandler.Instance.dir != 0)
@@ -152,17 +154,25 @@ public class PlayerController : NetworkBehaviour
     }
     
     private void DoRoll() {
-        VFXManager.Instance.SendVFX(ParticleType.DUST_LARGE, transform.position + 0.5f * Vector3.up, facing == -1);
+        VFXManager.Instance.SyncVFX(ParticleType.DUST_LARGE, transform.position + 0.5f * Vector3.up, facing == -1);
         AttachVFX(ParticlePrefabType.DUST_TRAIL, 1.5f * Vector3.down);
         actionID = 0;
         StartAction();
         move.OverrideCurve(rollSpeed, rollCurve, facing);
     }
 
+    private void StartRoll() {
+        stats.SetInvuln(true);
+    }
+
+    private void EndRoll() {
+        stats.SetInvuln(false);
+    }
+
     public void SpawnDust() {
         if (!isLocalPlayer || !grounded)
             return;
-        VFXManager.Instance.SendVFX(ParticleType.DUST_SMALL, transform.position + new Vector3(-facing, 0.5f), facing == -1);
+        VFXManager.Instance.SyncVFX(ParticleType.DUST_SMALL, transform.position + new Vector3(-facing, 0.5f), facing == -1);
     }
 
     private bool bladeCharging = false;
@@ -174,7 +184,7 @@ public class PlayerController : NetworkBehaviour
             actionID = 1;
             StartAction();
             if (grounded) {
-                VFXManager.Instance.SendVFX(ParticleType.DUST_SMALL, transform.position + new Vector3(-facing, 0.5f), facing == -1);
+                VFXManager.Instance.SyncVFX(ParticleType.DUST_SMALL, transform.position + new Vector3(-facing, 0.5f), facing == -1);
                 if (InputHandler.Instance.move.down)
                     move.OverrideCurve(bladeSpeed, bladeCurve, facing);
                 else
@@ -216,7 +226,7 @@ public class PlayerController : NetworkBehaviour
         if (!isLocalPlayer)
             return;
         if (grounded)
-            VFXManager.Instance.SendVFX(ParticleType.DUST_LARGE, transform.position + 0.5f * Vector3.up, facing == -1);
+            VFXManager.Instance.SyncVFX(ParticleType.DUST_LARGE, transform.position + 0.5f * Vector3.up, facing == -1);
         bladeCharging = false;
         bladeReady = false;
         jump.SetGravity(0);
