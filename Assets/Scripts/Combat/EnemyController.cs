@@ -22,6 +22,9 @@ public class EnemyController : NetworkBehaviour
     private GameObject activeHitbox = null;
     [SerializeField] private HitboxData data;
     [SerializeField] private AnimationCurve attackMotion;
+
+    bool hitpaused;
+    float hitpauseEnd;
     public void OnDie() {
         NetworkServer.Destroy(gameObject);
     }
@@ -36,6 +39,11 @@ public class EnemyController : NetworkBehaviour
     void FixedUpdate() {
         if (!isServer)
             return;
+
+        if (hitpaused && Time.time > hitpauseEnd) {
+            hitpaused = false;
+            animator.speed = 1;
+        }
 
         var closestPlayer = GetClosestPlayer();
         var dist = closestPlayer.transform.position.x - transform.position.x;
@@ -75,8 +83,15 @@ public class EnemyController : NetworkBehaviour
         sprite.flipX = facing;
     }
 
-    private void RecieveHitstop(float duration) {
+    [ClientRpc] private void RecieveHitstop(float duration) {
+        if (!isServer)
+            return;
 
+        hitpaused = true;
+        hitpauseEnd = Time.time + duration;
+        move.Pause(hitpauseEnd);
+
+        animator.speed = 0;
     }
 
     private void DestroyActiveHitbox() {
@@ -108,9 +123,7 @@ public class EnemyController : NetworkBehaviour
         animator.SetTrigger("act");
     }
 
-    private async void EndAction() {
-        Debug.Log("Enemy action ended");
-
+    private void EndAction() {
         actionTimer = Time.time + actionDelay;
 
         acting = false;

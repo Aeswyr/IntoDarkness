@@ -14,6 +14,8 @@ public class VFXManager : NetworkSingleton<VFXManager>
 
     [Header("Floating Text")]
     [SerializeField] private GameObject textPrefab;
+    [Header("Afterimage")]
+    [SerializeField] private GameObject afterimagePrefab;
 
     public void SyncVFX(ParticleType type, Vector3 pos, bool flip) {
         if (isServer)
@@ -79,6 +81,10 @@ public class VFXManager : NetworkSingleton<VFXManager>
         FloatingTextController controller = textFloater.GetComponent<FloatingTextController>();
     
         controller.SetText(text, color);
+    }
+
+    public GameObject GetAfterimagePrefab() {
+        return afterimagePrefab;
     }
 }
 

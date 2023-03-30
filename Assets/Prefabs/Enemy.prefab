@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 7153981830210551359}
   - component: {fileID: 566408121589313859}
   - component: {fileID: 7022708952488581888}
+  - component: {fileID: 4130063456889014909}
   - component: {fileID: 7169558403356527443}
   - component: {fileID: 115541509867436352}
   - component: {fileID: 9152683438064409770}
@@ -132,6 +133,21 @@ MonoBehaviour:
   Vitality: 5
   Endurance: 5
   Awareness: 5
+--- !u!114 &4130063456889014909
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3650351251837336403}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99aea8a3d24569f42840ba03436df7f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  sprite: {fileID: 3253606422267491761}
 --- !u!114 &7169558403356527443
 MonoBehaviour:
   m_ObjectHideFlags: 0

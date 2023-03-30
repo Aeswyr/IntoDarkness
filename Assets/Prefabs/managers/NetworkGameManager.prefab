@@ -73,6 +73,7 @@ MonoBehaviour:
   particles:
   - {fileID: 2529229389930389568, guid: 50d4ec40ba7716d498a09051d2a70717, type: 3}
   textPrefab: {fileID: 6064983318388810870, guid: a177040647364e7478dd004afaec0846, type: 3}
+  afterimagePrefab: {fileID: 4333303486465926757, guid: 706d4fc4672e77c42b2780facc1cc5a3, type: 3}
 --- !u!114 &631280391534991585
 MonoBehaviour:
   m_ObjectHideFlags: 0

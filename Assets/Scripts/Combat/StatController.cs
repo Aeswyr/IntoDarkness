@@ -13,11 +13,43 @@ public class StatController : NetworkBehaviour
 
     private int maxHealth;
     [SyncVar] private int health;
+
+    private int maxFocus;
+    private int focus;
+    private int maxStamina;
+    private int stamina;
+    private float staminaRestore;
+
+    bool staminaLocked = false;
+
     bool invuln;
 
     void Awake() {
         maxHealth = Vitality * 2;
         health = maxHealth;
+
+        maxStamina = Endurance * 20;
+        stamina = maxStamina;
+
+        maxFocus = Awareness * 2;
+        focus = maxFocus;
+    }
+
+    void Start() {
+        if (isLocalPlayer) {
+            PlayerHUDManager.Instance.RefreshHealthBar(maxHealth, health);
+            PlayerHUDManager.Instance.RefreshStaminaBar(maxStamina, stamina, staminaLocked);
+            PlayerHUDManager.Instance.RefreshFocusBar(maxFocus, focus);
+        }
+    }
+
+    void FixedUpdate() {
+        if (Time.time > staminaRestore) {
+            if (staminaLocked)
+                RestoreStamina(maxStamina / 100);
+            else
+                RestoreStamina(maxStamina / 100);
+        }
     }
 
     public void OnHit(HitboxController hit) {
@@ -31,7 +63,8 @@ public class StatController : NetworkBehaviour
             color = Color.yellow;
 
         if (!data.IsHeal && invuln) {
-
+            if (gameObject.TryGetComponent(out UnitVFXController vfxController)) 
+            vfxController.SyncAfterimage(0.5f);
             return;
         }
             
@@ -42,6 +75,7 @@ public class StatController : NetworkBehaviour
         VFXManager.Instance.SyncVFX(ParticleType.HITSPARK_DEFAULT, transform.position, flip);
 
         health -= amt;
+
         {
             float hitstopDuration = 0.1f;
             // hitstop on the target who was hit
@@ -65,6 +99,40 @@ public class StatController : NetworkBehaviour
                 enemy.OnDie();
             }
         }
+
+        if (isLocalPlayer)
+            PlayerHUDManager.Instance.RefreshHealthBar(maxHealth, health);
+    }
+
+    public bool CanSpendStamina() {
+        return stamina > 0 && !staminaLocked;
+    }
+
+    public void SpendStamina(int amt) {
+        stamina -= amt;
+
+        staminaRestore = Time.time + 0.75f;
+
+        if (stamina <= 0) {
+            stamina = 0;
+            staminaLocked = true;
+
+            staminaRestore = Time.time;
+        }
+
+        if (isLocalPlayer)
+            PlayerHUDManager.Instance.RefreshStaminaBar(maxStamina, stamina, staminaLocked);
+    }
+
+    public void RestoreStamina(int amt) {
+        stamina += amt;
+        if (stamina >= maxStamina) {
+            stamina = maxStamina;
+            staminaLocked = false;
+        }
+
+        if (isLocalPlayer)
+            PlayerHUDManager.Instance.RefreshStaminaBar(maxStamina, stamina, staminaLocked);
     }
 
     public void SetInvuln(bool state) {

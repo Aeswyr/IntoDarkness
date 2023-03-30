@@ -30,6 +30,7 @@ public class PlayerController : NetworkBehaviour
     private GameObject activeHitbox = null;
     [SerializeField] private HitboxData swordPrimary;
     [SerializeField] private HitboxData swordSecondary;
+    
 
     private int facing = 1;
     private bool grounded = false;
@@ -130,7 +131,7 @@ public class PlayerController : NetworkBehaviour
 
             animator.SetBool("grounded", false);
             animator.SetTrigger("jump");
-        } else if (!acting && grounded && InputHandler.Instance.dodge.pressed) { // do a roll
+        } else if (!acting && grounded && stats.CanSpendStamina() && InputHandler.Instance.dodge.pressed) { // do a roll
             DoRoll();
         } else if (CheckAttackBlade()) { // sword
         } else if (CheckAttackBow()) { // bow
@@ -154,6 +155,7 @@ public class PlayerController : NetworkBehaviour
     }
     
     private void DoRoll() {
+        stats.SpendStamina(50);
         VFXManager.Instance.SyncVFX(ParticleType.DUST_LARGE, transform.position + 0.5f * Vector3.up, facing == -1);
         AttachVFX(ParticlePrefabType.DUST_TRAIL, 1.5f * Vector3.down);
         actionID = 0;
@@ -180,7 +182,8 @@ public class PlayerController : NetworkBehaviour
     private bool CheckAttackBlade() {
         if (weapon != 0)
             return false;
-        if (!acting && InputHandler.Instance.primary.pressed) {
+        if (!acting && stats.CanSpendStamina() && InputHandler.Instance.primary.pressed) {
+            stats.SpendStamina(20);
             actionID = 1;
             StartAction();
             if (grounded) {
@@ -191,7 +194,7 @@ public class PlayerController : NetworkBehaviour
                     move.StartDeceleration();
             }
             return true;
-        } else if (!acting && InputHandler.Instance.secondary.pressed) {
+        } else if (!acting && stats.CanSpendStamina() && InputHandler.Instance.secondary.pressed) {
             actionID = 2;
             StartAction();
             bladeCharging = true;
@@ -227,6 +230,7 @@ public class PlayerController : NetworkBehaviour
             return;
         if (grounded)
             VFXManager.Instance.SyncVFX(ParticleType.DUST_LARGE, transform.position + 0.5f * Vector3.up, facing == -1);
+        stats.SpendStamina(80);
         bladeCharging = false;
         bladeReady = false;
         jump.SetGravity(0);
@@ -319,10 +323,10 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc] private void RecieveHitstop(float duration) {
         if (!isLocalPlayer)
             return;
-        jump.Pause(Time.time + duration);
-        move.Pause(Time.time + duration);
-        animator.speed = 0;
         hitpauseEnd = Time.time + duration;
+        jump.Pause(hitpauseEnd);
+        move.Pause(hitpauseEnd);
+        animator.speed = 0;
         hitpaused = true;
     }
 
@@ -344,7 +348,4 @@ public class PlayerController : NetworkBehaviour
     [ClientRpc] private void RecieveAttachVFX(ParticleType type, Vector3 pos, bool flip) {
         VFXManager.Instance.CreateVFX(type, pos, flip);
     }
-
-
-    
 }
