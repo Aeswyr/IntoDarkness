@@ -11,7 +11,12 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private SpriteRenderer sprite;
     [SerializeField] private Animator animator;
     [SerializeField] private StatController stats;
+    [SerializeField] private InventoryController inventory;
+    public InventoryController Inventory {
+        get => inventory;
+    }
     [SerializeField] private BoxCollider2D hurtbox;
+    [SerializeField] private BoxCollider2D interactbox;
 
     [Header("Action Data")]
     [SerializeField] private float rollSpeed;
@@ -73,6 +78,8 @@ public class PlayerController : NetworkBehaviour
             return;
 
         GameManager.Instance.SetCameraFollow(transform);
+
+        interactbox.enabled = true;
     }
 
     // Update is called once per frame
@@ -115,7 +122,12 @@ public class PlayerController : NetworkBehaviour
             move.StartDeceleration();
         }
 
-        if (!acting && (grounded || hanging || Time.time < walljumpExpire) && InputHandler.Instance.jump.pressed) {
+
+        if (!acting && grounded && InputHandler.Instance.interact.pressed) {
+            RaycastHit2D[] results = new RaycastHit2D[1];
+            if (interactbox.Cast(Vector2.zero, results) > 0)
+                results[0].transform.GetComponent<InteractableController>().Interact(this);
+        } else if (!acting && (grounded || hanging || Time.time < walljumpExpire) && InputHandler.Instance.jump.pressed) {
             walljumpExpire = 0;
             hanging = false;
 
@@ -346,6 +358,6 @@ public class PlayerController : NetworkBehaviour
         RecieveAttachVFX(type, pos, flip);
     }
     [ClientRpc] private void RecieveAttachVFX(ParticleType type, Vector3 pos, bool flip) {
-        VFXManager.Instance.CreateVFX(type, pos, flip);
+        VFXManager.Instance.CreateVFX(type, pos, flip, transform);
     }
 }

@@ -17,22 +17,29 @@ public class VFXManager : NetworkSingleton<VFXManager>
     [Header("Afterimage")]
     [SerializeField] private GameObject afterimagePrefab;
 
-    public void SyncVFX(ParticleType type, Vector3 pos, bool flip) {
+    public void SyncVFX(ParticleType type, Vector3 pos, bool flip, bool renderBehind = false) {
         if (isServer)
-            RecieveVFX(type, pos, flip);
+            RecieveVFX(type, pos, flip, renderBehind);
         else
-            SendVFX(type, pos, flip);
+            SendVFX(type, pos, flip, renderBehind);
     }
-    [Command(requiresAuthority = false)] private void SendVFX(ParticleType type, Vector3 pos, bool flip) {
-        RecieveVFX(type, pos, flip);
-    }
-
-    [ClientRpc] private void RecieveVFX(ParticleType type, Vector3 pos, bool flip) {
-        CreateVFX(type, pos, flip);
+    [Command(requiresAuthority = false)] private void SendVFX(ParticleType type, Vector3 pos, bool flip, bool renderBehind) {
+        RecieveVFX(type, pos, flip, renderBehind);
     }
 
-    public void CreateVFX(ParticleType type, Vector3 pos, bool flip) {
-        GameObject particle = Instantiate(template, pos, Quaternion.identity);
+    [ClientRpc] private void RecieveVFX(ParticleType type, Vector3 pos, bool flip, bool renderBehind) {
+        CreateVFX(type, pos, flip, renderBehind: renderBehind);
+    }
+
+    public void CreateVFX(ParticleType type, Vector3 pos, bool flip, Transform parent = null, bool renderBehind = false) {
+        GameObject particle;
+        if (parent != null) {
+            particle = Instantiate(template, parent);
+            particle.transform.localPosition = pos;
+        } else {
+            particle = Instantiate(template, pos, Quaternion.identity);
+        }
+            
 
         Animator animator = particle.GetComponent<Animator>();
         AnimatorOverrideController animController = new AnimatorOverrideController(animator.runtimeAnimatorController);
@@ -41,7 +48,11 @@ public class VFXManager : NetworkSingleton<VFXManager>
 
         particle.GetComponent<DestroyAfterDelay>().Init(anims[(int)type].length);
 
-        particle.GetComponent<SpriteRenderer>().flipX = flip;
+        var sprite = particle.GetComponent<SpriteRenderer>();
+        sprite.flipX = flip;
+
+        if (renderBehind)
+            sprite.sortingLayerName = "VFX_Back";
     }
 
     public void SyncPrefabVFX(ParticlePrefabType type, Vector3 pos) {
@@ -89,7 +100,7 @@ public class VFXManager : NetworkSingleton<VFXManager>
 }
 
 public enum ParticleType {
-    DUST_SMALL, DUST_LARGE, DUST_LANDING, HITSPARK_DEFAULT
+    DUST_SMALL, DUST_LARGE, DUST_LANDING, HITSPARK_DEFAULT, PICKUP, PICKUP_FAILED
 }
 
 public enum ParticlePrefabType {

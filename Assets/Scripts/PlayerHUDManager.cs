@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerHUDManager : Singleton<PlayerHUDManager>
 {
+    [Header("Bars")]
     [SerializeField] private GameObject resourcePrefab;
     [SerializeField] private Image staminaBar;
 
@@ -19,6 +20,12 @@ public class PlayerHUDManager : Singleton<PlayerHUDManager>
     [SerializeField] private GameObject staminaHolder;
 
     [SerializeField] private float maxStaminaMod;
+
+    [Header("Resource Cards")]
+    [SerializeField] private GameObject resourceHolder;
+    [SerializeField] private GameObject cardHolder;
+    [SerializeField] private GameObject cardPrefab;
+    [SerializeField] List<Sprite> resourceSprites;
 
     List<Image> healthUnits = new List<Image>();
     List<Image> focusUnits = new List<Image>();
@@ -73,4 +80,38 @@ public class PlayerHUDManager : Singleton<PlayerHUDManager>
 
     }
     
+    Dictionary<ResourceCardType, GameObject> holderMap = new();
+    Dictionary<ResourceCardType, List<GameObject>> cardList = new();
+
+    public void AddResource(ResourceCardType type, int amt = 1) {
+        if (!holderMap.ContainsKey(type)) {
+            holderMap.Add(type, Instantiate(cardHolder, resourceHolder.transform));
+            cardList.Add(type, new());
+        }
+            
+
+        for (int i = 0; i < amt; i++) {
+            var card = Instantiate(cardPrefab, holderMap[type].transform);
+            card.GetComponent<Image>().sprite = resourceSprites[(int)type];
+            cardList[type].Add(card);
+        }
+    }
+
+    public void RemoveResource(ResourceCardType type, int amt = 1) {
+        if (!cardList.ContainsKey(type))
+            return;
+
+        amt = Mathf.Min(amt, cardList[type].Count);
+
+        for (int i = amt - 1; i >= 0; i--) {
+            Destroy(cardList[type][i]);
+            cardList[type].RemoveAt(i);
+        }
+
+        if (cardList[type].Count == 0) {
+            cardList.Remove(type);
+            Destroy(holderMap[type]);
+            holderMap.Remove(type);
+        }
+    }
 }

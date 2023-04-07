@@ -70,6 +70,8 @@ MonoBehaviour:
   - {fileID: 7400000, guid: 0eb5698f4632b134aa6a8473ede325a1, type: 2}
   - {fileID: 7400000, guid: cf3bae339bbaa094a93107384bff8988, type: 2}
   - {fileID: 7400000, guid: 4145428ab7941a142a73d0d4ca65a4e2, type: 2}
+  - {fileID: 7400000, guid: eb4c818486b80c34cae94e7f3c12c9ab, type: 2}
+  - {fileID: 7400000, guid: eb76d27f7095d354694cea44392cba72, type: 2}
   particles:
   - {fileID: 2529229389930389568, guid: 50d4ec40ba7716d498a09051d2a70717, type: 3}
   textPrefab: {fileID: 6064983318388810870, guid: a177040647364e7478dd004afaec0846, type: 3}

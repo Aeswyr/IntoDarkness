@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &255833527031184256
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8524350473074294756}
+  - component: {fileID: 4917052836205038997}
+  m_Layer: 11
+  m_Name: InteractBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8524350473074294756
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255833527031184256}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1030783516348868771}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &4917052836205038997
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 255833527031184256}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 3, y: 3}
+  m_EdgeRadius: 0
 --- !u!1 &2019059207241104322
 GameObject:
   m_ObjectHideFlags: 0
@@ -69,6 +127,7 @@ GameObject:
   - component: {fileID: 1030783516348868771}
   - component: {fileID: 7061316402069580559}
   - component: {fileID: 5375201410334064612}
+  - component: {fileID: 145482346745144784}
   - component: {fileID: 2817591829812308718}
   - component: {fileID: 5159113292233600979}
   - component: {fileID: 5332741944164415385}
@@ -100,6 +159,7 @@ Transform:
   m_Children:
   - {fileID: 4055707111191390364}
   - {fileID: 1727821341385872083}
+  - {fileID: 8524350473074294756}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -123,7 +183,9 @@ MonoBehaviour:
   sprite: {fileID: 4375919315086165391}
   animator: {fileID: -3843640825058986526}
   stats: {fileID: 5375201410334064612}
-  hurtbox: {fileID: 0}
+  inventory: {fileID: 145482346745144784}
+  hurtbox: {fileID: 538793755412427377}
+  interactbox: {fileID: 4917052836205038997}
   rollSpeed: 24
   rollCurve:
     serializedVersion: 2
@@ -224,6 +286,21 @@ MonoBehaviour:
   Vitality: 5
   Endurance: 5
   Awareness: 5
+--- !u!114 &145482346745144784
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3912926118970277985}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6aee94ab0592f0d40b06bb0fdf97e709, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1
+  resourceCap: 5
 --- !u!114 &2817591829812308718
 MonoBehaviour:
   m_ObjectHideFlags: 0
