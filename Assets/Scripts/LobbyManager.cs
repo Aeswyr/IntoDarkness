@@ -55,6 +55,8 @@ public class LobbyManager : Singleton<LobbyManager>
 
         networkManager.networkAddress = hostAddr;
         networkManager.StartClient();
+        
+        HUDManager.Instance.OnGameJoined();
     }
 
     

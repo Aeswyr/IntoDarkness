@@ -7,48 +7,40 @@ public class StatController : NetworkBehaviour
 {
     [SerializeField] private int Ingenuity; // Skill scaling
     [SerializeField] private int Might; // Weapon scaling
-    [SerializeField] private int Vitality; // HP scaling
-    [SerializeField] private int Endurance; // Stamina scaling
-    [SerializeField] private int Awareness; // Resource/Luck scaling
+    [SerializeField] private int Precision; // Luck scaling
 
-    private int maxHealth;
+    [SerializeField] private int maxHealth;
     [SyncVar] private int health;
 
-    private int maxFocus;
+    [SerializeField] private int maxFocus;
     private int focus;
-    private int maxStamina;
-    private int stamina;
-    private float staminaRestore;
-
-    bool staminaLocked = false;
+    [SerializeField] private int maxExert;
+    private int exert;
+    private float exertTimer;
 
     bool invuln;
 
     void Awake() {
-        maxHealth = Vitality * 2;
         health = maxHealth;
 
-        maxStamina = Endurance * 20;
-        stamina = maxStamina;
+        exert = maxExert;
 
-        maxFocus = Awareness * 2;
         focus = maxFocus;
     }
 
     void Start() {
         if (isLocalPlayer) {
             PlayerHUDManager.Instance.RefreshHealthBar(maxHealth, health);
-            PlayerHUDManager.Instance.RefreshStaminaBar(maxStamina, stamina, staminaLocked);
+            PlayerHUDManager.Instance.RefreshExertBar(maxExert, exert);
             PlayerHUDManager.Instance.RefreshFocusBar(maxFocus, focus);
         }
     }
 
     void FixedUpdate() {
-        if (Time.time > staminaRestore) {
-            if (staminaLocked)
-                RestoreStamina(maxStamina / 100);
-            else
-                RestoreStamina(maxStamina / 100);
+        
+        if (exert < maxExert && Time.time > exertTimer) {
+            RestoreExert(1);
+            exertTimer = 2f + Time.time;
         }
     }
 
@@ -104,35 +96,27 @@ public class StatController : NetworkBehaviour
             PlayerHUDManager.Instance.RefreshHealthBar(maxHealth, health);
     }
 
-    public bool CanSpendStamina() {
-        return stamina > 0 && !staminaLocked;
+    public bool CanSpendExert() {
+        return exert > 0;
     }
 
-    public void SpendStamina(int amt) {
-        stamina -= amt;
+    public void SpendExert() {
+        exert--;
 
-        staminaRestore = Time.time + 0.75f;
+        exertTimer = 2f + Time.time;
 
-        if (stamina <= 0) {
-            stamina = 0;
-            staminaLocked = true;
+        if (isLocalPlayer)
+            PlayerHUDManager.Instance.RefreshExertBar(maxExert, exert);
+    }
 
-            staminaRestore = Time.time;
+    public void RestoreExert(int amt) {
+        exert += amt;
+        if (exert >= maxExert) {
+            exert = maxExert;
         }
 
         if (isLocalPlayer)
-            PlayerHUDManager.Instance.RefreshStaminaBar(maxStamina, stamina, staminaLocked);
-    }
-
-    public void RestoreStamina(int amt) {
-        stamina += amt;
-        if (stamina >= maxStamina) {
-            stamina = maxStamina;
-            staminaLocked = false;
-        }
-
-        if (isLocalPlayer)
-            PlayerHUDManager.Instance.RefreshStaminaBar(maxStamina, stamina, staminaLocked);
+            PlayerHUDManager.Instance.RefreshExertBar(maxExert, exert);
     }
 
     public void SetInvuln(bool state) {

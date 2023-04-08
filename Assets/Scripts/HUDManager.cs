@@ -11,7 +11,7 @@ public class HUDManager : Singleton<HUDManager>
 
     public void HostPressed() {
         if (lobby.Host())
-            hostUI.SetActive(false);
+            OnGameJoined();
     }
 
     void FixedUpdate() {
@@ -23,5 +23,9 @@ public class HUDManager : Singleton<HUDManager>
 
     public void Print(string output) {
         debugOutput.text = output;
+    }
+
+    public void OnGameJoined() {
+        hostUI.SetActive(false);
     }
 }

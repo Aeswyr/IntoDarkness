@@ -11,6 +11,9 @@ public class WorldManager : NetworkSingleton<WorldManager>
     List<PlayerController> players = new List<PlayerController>();
     float spawnDelay = 5;
     float spawnTime;
+    [SyncVar] long tick;
+    [SerializeField] long dayDuration;
+    [SerializeField] long nightDuration;
 
     public void Start() {
         spawnTime = -spawnDelay;
@@ -18,11 +21,14 @@ public class WorldManager : NetworkSingleton<WorldManager>
 
     void FixedUpdate()
     {
-        
+        PlayerHUDManager.Instance.SetTime(tick * Time.fixedDeltaTime);
+
         if (!isServer)
             return;
 
-        if (Time.time - spawnTime > spawnDelay) {
+        tick = (tick + 1) % (50 * (dayDuration + nightDuration));
+
+        if (Time.time - spawnTime > spawnDelay && tick > dayDuration * 0/*50*/) {
             spawnTime = Time.time;
             SpawnEnemy(EnemyType.BASIC, new Vector2(Random.Range(-16, 16), 0));
         }

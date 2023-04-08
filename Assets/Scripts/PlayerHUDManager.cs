@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class PlayerHUDManager : Singleton<PlayerHUDManager>
 {
     [Header("Bars")]
-    [SerializeField] private GameObject resourcePrefab;
-    [SerializeField] private Image staminaBar;
 
-    [SerializeField] private Sprite healthEmptySprite;
-    [SerializeField] private Sprite healthFullSprite;
+    [SerializeField] private RectTransform healthHolder;
+    [SerializeField] private Image healthBar;
+    [SerializeField] private TextMeshProUGUI healthCounter;
+    [SerializeField] private RectTransform healthMarker;
+    [SerializeField] private RectTransform focusHolder;
+    [SerializeField] private Image focusBar;
+    [SerializeField] private TextMeshProUGUI focusCounter;
+    [SerializeField] private RectTransform focusMarker;
 
-    [SerializeField] private Sprite focusEmptySprite;
-    [SerializeField] private Sprite focusFullSprite;
-
-    [SerializeField] private GameObject healthHolder;
-    [SerializeField] private GameObject focusHolder;
-    [SerializeField] private GameObject staminaHolder;
-
-    [SerializeField] private float maxStaminaMod;
+    [SerializeField] private GameObject exertPrefab;
+    [SerializeField] private Transform exertHolder;
+    [SerializeField] private Sprite exertFull;
+    [SerializeField] private Sprite exertEmpty;
+    private List<GameObject> exert = new();
 
     [Header("Resource Cards")]
     [SerializeField] private GameObject resourceHolder;
@@ -27,57 +29,61 @@ public class PlayerHUDManager : Singleton<PlayerHUDManager>
     [SerializeField] private GameObject cardPrefab;
     [SerializeField] List<Sprite> resourceSprites;
 
-    List<Image> healthUnits = new List<Image>();
-    List<Image> focusUnits = new List<Image>();
+    [Header("Info")]
+    [SerializeField] private GameObject clockBar;
+    [SerializeField] private float durationDay;
+    [SerializeField] private float durationNight;
 
     public void RefreshHealthBar(int maxHealth, int currentHealth) {
-        if (healthUnits.Count != maxHealth) {
-            foreach (var unit in healthUnits) {
-                Destroy(unit.gameObject);
-            }
-            healthUnits.Clear();
-            for (int i = 0; i < maxHealth; i++)
-                healthUnits.Add(Instantiate(resourcePrefab, healthHolder.transform).GetComponent<Image>());
-        }
+        healthCounter.text = $"{currentHealth}/{maxHealth}";
 
-        for (int i = 0; i < healthUnits.Count; i++) {
-            if (i < currentHealth)
-                healthUnits[i].sprite = healthFullSprite;
-            else
-                healthUnits[i].sprite = healthEmptySprite;
-        }
+        float maxWidth = healthHolder.rect.width - 2;
+        float offset = maxWidth * (float)currentHealth / maxHealth;
+
+
+
+        healthBar.fillAmount = (float)currentHealth / maxHealth;
+
+        Vector3 pos = healthMarker.anchoredPosition;
+        if (currentHealth > 0)
+            pos.x = offset;
+        else
+            pos.x = -1;
+        healthMarker.anchoredPosition = pos;
     }
 
     public void RefreshFocusBar(int maxFocus, int currentFocus) {
-        if (focusUnits.Count != maxFocus) {
-            foreach (var unit in focusUnits) {
-                Destroy(unit.gameObject);
-            }
-            focusUnits.Clear();
-            for (int i = 0; i < maxFocus; i++)
-                focusUnits.Add(Instantiate(resourcePrefab, focusHolder.transform).GetComponent<Image>());
-        }
+        focusCounter.text = $"{currentFocus}/{maxFocus}";
 
-        for (int i = 0; i < focusUnits.Count; i++) {
-            if (i < currentFocus)
-                focusUnits[i].sprite = focusFullSprite;
-            else
-                focusUnits[i].sprite = focusEmptySprite;
-        }
+        float maxWidth = focusHolder.rect.width - 2;
+        float offset = maxWidth * (float)currentFocus / maxFocus;
+
+
+
+        focusBar.fillAmount = (float)currentFocus / maxFocus;
+
+        Vector3 pos = focusMarker.anchoredPosition;
+        if (currentFocus > 0)
+            pos.x = offset;
+        else
+            pos.x = -1;
+        focusMarker.anchoredPosition = pos;
     }
 
-    public void RefreshStaminaBar(int maxStamina, int currentStamina, bool locked) {
-        var scale = staminaHolder.transform.localScale;
-        scale.x = maxStamina / maxStaminaMod;
-        staminaHolder.transform.localScale = scale;
+    public void RefreshExertBar(int maxExert, int currentExert) {
+        foreach (var obj in exert)
+            Destroy(obj);
+        exert.Clear();
 
-        staminaBar.fillAmount = (float) currentStamina / maxStamina;
-
-        if (locked)
-            staminaBar.color = Color.gray;
-        else
-            staminaBar.color = Color.white;
-
+        for (int i = 0; i < maxExert; i++) {
+            var newExert = Instantiate(exertPrefab, exertHolder);
+            exert.Add(newExert);
+            var image = newExert.GetComponent<Image>();
+            if (i < currentExert)
+                image.sprite = exertFull;
+            else
+                image.sprite = exertEmpty;
+        }
     }
     
     Dictionary<ResourceCardType, GameObject> holderMap = new();
@@ -113,5 +119,19 @@ public class PlayerHUDManager : Singleton<PlayerHUDManager>
             Destroy(holderMap[type]);
             holderMap.Remove(type);
         }
+    }
+
+    public void SetTime(float time) {
+        float cycleDuration = durationDay + durationNight;
+        float cycleTime = time % cycleDuration;
+
+        float projectionTime = 0.5f * cycleTime / durationDay;
+        if (cycleTime > durationDay)
+            projectionTime = 0.5f + 0.5f * (cycleTime - durationDay) / durationNight;
+
+        Vector3 position = clockBar.transform.localPosition;
+        position.x = -32 + -((96 + Mathf.CeilToInt(128 * projectionTime)) % 128);
+        clockBar.transform.localPosition = position;
+
     }
 }

@@ -108,13 +108,13 @@ TextureImporter:
       name: ui_hud_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 20
-        width: 10
-        height: 10
+        x: 16
+        y: 50
+        width: 80
+        height: 14
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 16, y: 0, z: 32, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -129,13 +129,13 @@ TextureImporter:
       name: ui_hud_1
       rect:
         serializedVersion: 2
-        x: 16
-        y: 26
-        width: 5
-        height: 4
+        x: 96
+        y: 37
+        width: 78
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 16, y: 0, z: 32, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -151,12 +151,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 23
-        width: 15
-        height: 2
+        y: 37
+        width: 78
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 16, y: 0, z: 32, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -171,13 +171,13 @@ TextureImporter:
       name: ui_hud_3
       rect:
         serializedVersion: 2
-        x: 1
-        y: 11
-        width: 11
-        height: 7
+        x: 16
+        y: 21
+        width: 78
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 16, y: 0, z: 32, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -193,12 +193,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 16
-        y: 12
-        width: 5
-        height: 4
+        y: 5
+        width: 78
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 16, y: 0, z: 32, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -213,10 +213,10 @@ TextureImporter:
       name: ui_hud_5
       rect:
         serializedVersion: 2
-        x: 16
-        y: 9
-        width: 15
-        height: 2
+        x: 111
+        y: 53
+        width: 1
+        height: 9
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -224,7 +224,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 8dbcd36988d268c4a8f7510136e0192e
+      spriteID: 4992f7371d82b7043bc009d931d0cfbb
       internalID: -657302127
       vertices: []
       indices: 
@@ -234,10 +234,10 @@ TextureImporter:
       name: ui_hud_6
       rect:
         serializedVersion: 2
-        x: 16
+        x: 100
         y: 4
-        width: 5
-        height: 4
+        width: 9
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -245,8 +245,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6b787698d897614c8f1fa2b91fbd633
-      internalID: -511425650
+      spriteID: 229f80f224551d4479a8147e54dc90bf
+      internalID: 94074886
       vertices: []
       indices: 
       edges: []
@@ -255,10 +255,10 @@ TextureImporter:
       name: ui_hud_7
       rect:
         serializedVersion: 2
-        x: 16
-        y: 18
-        width: 5
-        height: 4
+        x: 116
+        y: 4
+        width: 9
+        height: 11
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -266,8 +266,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 055d6bf5111ba1847ad988096aefe90b
-      internalID: 2044866436
+      spriteID: 0218c160ccf6d314b9a1f44f348705bc
+      internalID: -909159304
       vertices: []
       indices: 
       edges: []
@@ -286,11 +286,11 @@ TextureImporter:
       ui_hud_2: 111970980
       ui_hud_4: -1046617979
       ui_hud_5: -657302127
-      ui_hud_6: -511425650
+      ui_hud_6: 94074886
       ui_hud_3: -2070153232
       ui_hud_1: 1441414586
       ui_hud_0: -713280022
-      ui_hud_7: 2044866436
+      ui_hud_7: -909159304
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -130,9 +130,10 @@ MonoBehaviour:
   syncInterval: 0.1
   Ingenuity: 5
   Might: 5
-  Vitality: 5
-  Endurance: 5
-  Awareness: 5
+  Precision: 0
+  maxHealth: 10
+  maxFocus: 0
+  maxExert: 0
 --- !u!114 &4130063456889014909
 MonoBehaviour:
   m_ObjectHideFlags: 0

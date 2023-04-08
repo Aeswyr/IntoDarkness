@@ -143,7 +143,7 @@ public class PlayerController : NetworkBehaviour
 
             animator.SetBool("grounded", false);
             animator.SetTrigger("jump");
-        } else if (!acting && grounded && stats.CanSpendStamina() && InputHandler.Instance.dodge.pressed) { // do a roll
+        } else if (!acting && grounded && stats.CanSpendExert() && InputHandler.Instance.dodge.pressed) { // do a roll
             DoRoll();
         } else if (CheckAttackBlade()) { // sword
         } else if (CheckAttackBow()) { // bow
@@ -167,7 +167,7 @@ public class PlayerController : NetworkBehaviour
     }
     
     private void DoRoll() {
-        stats.SpendStamina(50);
+        stats.SpendExert();
         VFXManager.Instance.SyncVFX(ParticleType.DUST_LARGE, transform.position + 0.5f * Vector3.up, facing == -1);
         AttachVFX(ParticlePrefabType.DUST_TRAIL, 1.5f * Vector3.down);
         actionID = 0;
@@ -194,8 +194,7 @@ public class PlayerController : NetworkBehaviour
     private bool CheckAttackBlade() {
         if (weapon != 0)
             return false;
-        if (!acting && stats.CanSpendStamina() && InputHandler.Instance.primary.pressed) {
-            stats.SpendStamina(20);
+        if (!acting && InputHandler.Instance.primary.pressed) {
             actionID = 1;
             StartAction();
             if (grounded) {
@@ -206,7 +205,7 @@ public class PlayerController : NetworkBehaviour
                     move.StartDeceleration();
             }
             return true;
-        } else if (!acting && stats.CanSpendStamina() && InputHandler.Instance.secondary.pressed) {
+        } else if (!acting && stats.CanSpendExert() && InputHandler.Instance.secondary.pressed) {
             actionID = 2;
             StartAction();
             bladeCharging = true;
@@ -242,7 +241,7 @@ public class PlayerController : NetworkBehaviour
             return;
         if (grounded)
             VFXManager.Instance.SyncVFX(ParticleType.DUST_LARGE, transform.position + 0.5f * Vector3.up, facing == -1);
-        stats.SpendStamina(80);
+        stats.SpendExert();
         bladeCharging = false;
         bladeReady = false;
         jump.SetGravity(0);
