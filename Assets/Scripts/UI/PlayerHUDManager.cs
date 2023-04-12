@@ -34,6 +34,9 @@ public class PlayerHUDManager : Singleton<PlayerHUDManager>
     [SerializeField] private float durationDay;
     [SerializeField] private float durationNight;
 
+    [Header("Other")]
+    [SerializeField] private Animator animator;
+
     public void RefreshHealthBar(int maxHealth, int currentHealth) {
         healthCounter.text = $"{currentHealth}/{maxHealth}";
 
@@ -133,5 +136,12 @@ public class PlayerHUDManager : Singleton<PlayerHUDManager>
         position.x = -32 + -((96 + Mathf.CeilToInt(128 * projectionTime)) % 128);
         clockBar.transform.localPosition = position;
 
+    }
+
+    public void ToggleHUD(bool toggle) {
+        if (toggle)
+            animator.SetTrigger("hud_enable");
+        else
+            animator.SetTrigger("hud_disable");
     }
 }

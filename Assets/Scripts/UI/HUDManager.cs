@@ -13,19 +13,13 @@ public class HUDManager : Singleton<HUDManager>
         if (lobby.Host())
             OnGameJoined();
     }
-
-    void FixedUpdate() {
-        if (InputHandler.Instance.menu.pressed) {
-            Debug.Log("Game Closing");
-            Application.Quit();
-        }
-    }
-
+    
     public void Print(string output) {
         debugOutput.text = output;
     }
 
     public void OnGameJoined() {
         hostUI.SetActive(false);
+        CinematicUIManager.Instance.ToggleBars(false);
     }
 }

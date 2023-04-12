@@ -28,7 +28,7 @@ public class WorldManager : NetworkSingleton<WorldManager>
 
         tick = (tick + 1) % (50 * (dayDuration + nightDuration));
 
-        if (Time.time - spawnTime > spawnDelay && tick > dayDuration * 0/*50*/) {
+        if (Time.time - spawnTime > spawnDelay && tick > dayDuration * 50) {
             spawnTime = Time.time;
             SpawnEnemy(EnemyType.BASIC, new Vector2(Random.Range(-16, 16), 0));
         }

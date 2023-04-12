@@ -42,6 +42,8 @@ public class PlayerController : NetworkBehaviour
     private bool acting = false;
     private bool hitpaused = false;
     private float hitpauseEnd;
+
+    private bool paused = false;
     
     private bool m_hanging = false;
     private bool hanging {
@@ -107,6 +109,26 @@ public class PlayerController : NetworkBehaviour
         hanging = !grounded && colCheck.CheckWallhang(facing);
 
         int oldFacing = facing;
+
+        if (InputHandler.Instance.menu.pressed) {
+
+            if (restPoint != null)
+                restPoint.OnInteract(this);
+            else
+            {
+                paused = !paused;
+
+                if (paused) {
+                    PauseMenuManager.Instance.ToggleVisibility(true);
+                    if (!acting)
+                        move.StartDeceleration();
+                } else
+                    PauseMenuManager.Instance.ToggleVisibility(false);
+            }
+        }
+
+        if (paused)
+            return;
 
         if (!acting && Time.time > walljumpLockout && InputHandler.Instance.move.pressed) {
             move.StartAcceleration(InputHandler.Instance.dir);
@@ -189,6 +211,17 @@ public class PlayerController : NetworkBehaviour
         VFXManager.Instance.SyncVFX(ParticleType.DUST_SMALL, transform.position + new Vector3(-facing, 0.5f), facing == -1);
     }
 
+
+    RestPointController restPoint = null;
+    public void ToggleRest(bool toggle, RestPointController restPoint) {
+        acting = toggle;
+        animator.SetBool("resting", toggle);
+        move.ForceStop();
+        if (toggle)
+            this.restPoint = restPoint;
+        else
+            this.restPoint = null;
+    }
     private bool bladeCharging = false;
     private bool bladeReady = false;
     private bool CheckAttackBlade() {

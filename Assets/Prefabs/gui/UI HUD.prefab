@@ -600,6 +600,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6267748411427251894}
   - component: {fileID: 4206562045887755746}
+  - component: {fileID: 3169858971333373774}
+  - component: {fileID: 1476890559269589556}
   m_Layer: 0
   m_Name: UI HUD
   m_TagString: Untagged
@@ -664,6 +666,39 @@ MonoBehaviour:
   clockBar: {fileID: 3082661541025302626}
   durationDay: 210
   durationNight: 90
+  animator: {fileID: 1476890559269589556}
+--- !u!225 &3169858971333373774
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3940057807455929141}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 0
+  m_BlocksRaycasts: 0
+  m_IgnoreParentGroups: 0
+--- !u!95 &1476890559269589556
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3940057807455929141}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 6e42b616aaed70240bb334d715dddf73, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4286960428044247856
 GameObject:
   m_ObjectHideFlags: 0
