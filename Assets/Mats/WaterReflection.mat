@@ -69,6 +69,7 @@ Material:
     - _EnableExternalAlpha: 0
     - _RefractionStrength: 1.02
     - _WaterSpeed: 0.02
+    - _yOffset: 0.03125
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _Flip: {r: 1, g: 1, b: 1, a: 1}

@@ -50,6 +50,9 @@ MonoBehaviour:
   syncInterval: 0.1
   enemyPrefabs:
   - {fileID: 3650351251837336403, guid: c787c35be45d2a24eb0f0bbcf4367f67, type: 3}
+  interactablePrefabs:
+  - {fileID: 6524466895201048645, guid: 49c2f7f5a3e03e746b2491c85d1e1902, type: 3}
+  - {fileID: 6524466895201048645, guid: 20aa9443f4055ac4d82d9c8630efd8da, type: 3}
   dayDuration: 210
   nightDuration: 90
 --- !u!114 &301642275762127614

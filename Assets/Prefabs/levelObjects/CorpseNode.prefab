@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 7199964997816604407}
   - component: {fileID: -1766888443463169739}
-  - component: {fileID: 2503541005275669762}
   - component: {fileID: 8979784417004160754}
   - component: {fileID: 2883466682417000306}
   - component: {fileID: 2212726296423125383}
+  - component: {fileID: 6076200081242898354}
   m_Layer: 10
-  m_Name: ResourceNode
+  m_Name: CorpseNode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: a477d8e2f013a094e803a03ee631c25e, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -76,8 +76,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 135561617
   m_SortingLayer: 5
-  m_SortingOrder: -10
-  m_Sprite: {fileID: 21300000, guid: 08648ca5a31abc14aaf41948659deddc, type: 3}
+  m_SortingOrder: 1
+  m_Sprite: {fileID: 906039524, guid: c84af82103ed98e4d9941e44577d6827, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -88,24 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &2503541005275669762
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6524466895201048645}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20e6e7b2604866b45a1a0e29ffcf624e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  syncMode: 0
-  syncInterval: 0.1
-  type: 0
-  amt: 1
-  maxUses: 3
-  interact: {fileID: 8979784417004160754}
 --- !u!114 &8979784417004160754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,8 +104,8 @@ MonoBehaviour:
   action:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 2503541005275669762}
-        m_TargetAssemblyTypeName: ResourceNodeController, Assembly-CSharp
+      - m_Target: {fileID: 6076200081242898354}
+        m_TargetAssemblyTypeName: CorpseNodeController, Assembly-CSharp
         m_MethodName: OnInteract
         m_Mode: 0
         m_Arguments:
@@ -160,7 +142,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 3, y: 2}
+    oldSize: {x: 8, y: 6}
     newSize: {x: 2.25, y: 3}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -184,5 +166,19 @@ MonoBehaviour:
   sceneId: 0
   serverOnly: 0
   visible: 0
-  m_AssetId: 49c2f7f5a3e03e746b2491c85d1e1902
+  m_AssetId: 20aa9443f4055ac4d82d9c8630efd8da
   hasSpawned: 0
+--- !u!114 &6076200081242898354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6524466895201048645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 189df9ea0b1e6e947bd5ac6e12a84147, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  syncMode: 0
+  syncInterval: 0.1

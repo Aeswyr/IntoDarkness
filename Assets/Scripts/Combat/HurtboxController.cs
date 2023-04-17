@@ -18,13 +18,15 @@ public class HurtboxController : MonoBehaviour
         }
 
         if (owner.TryGetComponent(out EnemyController enemy)) {
-            if (!enemy.isServer)
-                return;
             if (hitbox.GetTeam() == EntityTeam.ENEMY)
                 return;
+            if (hitbox.GetOwner().TryGetComponent(out PlayerController sourcePlayer)
+                && !sourcePlayer.isLocalPlayer) {
+                    return;
+            }
         }
 
-        
-        action.Invoke(hitbox);
+        if (hitbox.CanHit(owner))
+            action.Invoke(hitbox);
     }
 }

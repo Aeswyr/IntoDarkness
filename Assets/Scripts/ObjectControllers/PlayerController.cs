@@ -31,6 +31,11 @@ public class PlayerController : NetworkBehaviour
     [SerializeField] private float walljumpDuration;
 
     [Header("Combat Data")]
+
+    [SerializeField] private float knockbackSpeed;
+    [SerializeField] private AnimationCurve knockbackCurve;
+    [SerializeField] private float deathSpeed;
+    [SerializeField] private AnimationCurve deathCurve;
     [SerializeField] private GameObject hitboxPrefab;
     private GameObject activeHitbox = null;
     [SerializeField] private HitboxData swordPrimary;
@@ -42,6 +47,9 @@ public class PlayerController : NetworkBehaviour
     private bool acting = false;
     private bool hitpaused = false;
     private float hitpauseEnd;
+
+    private bool hitstunned = false;
+    private bool dead = false;
 
     private bool paused = false;
     
@@ -95,6 +103,9 @@ public class PlayerController : NetworkBehaviour
             animator.speed = 1;
         }
 
+        if (hitstunned)
+            return;
+
         bool pGrounded = grounded;
         grounded = colCheck.CheckGrounded();
 
@@ -144,6 +155,11 @@ public class PlayerController : NetworkBehaviour
             move.StartDeceleration();
         }
 
+        if (dead) {
+            FinalizeFrame();
+            return;
+        }
+            
 
         if (!acting && grounded && InputHandler.Instance.interact.pressed) {
             RaycastHit2D[] results = new RaycastHit2D[1];
@@ -180,12 +196,16 @@ public class PlayerController : NetworkBehaviour
                 move.StartDeceleration();
         }
 
-        sprite.flipX = facing == -1;
+        void FinalizeFrame() {
+            sprite.flipX = facing == -1;
 
-        if (oldFacing != facing)
-            SendFacing(facing == -1);
+            if (oldFacing != facing)
+                SendFacing(facing == -1);
 
-        GameManager.Instance.GetLevel().UpdateWaterline(transform.position.x);
+            GameManager.Instance.GetLevel().UpdateParallax(transform.position);
+        }
+
+        FinalizeFrame();
     }
     
     private void DoRoll() {
@@ -205,6 +225,40 @@ public class PlayerController : NetworkBehaviour
         stats.SetInvuln(false);
     }
 
+    public void OnHit(int dmg, GameObject other) {
+        if (!isLocalPlayer)
+            return;
+
+        if (restPoint != null)
+            restPoint.OnInteract(this);
+
+        EndAction();
+
+        hitstunned = true;
+        animator.SetTrigger("hurt");
+        
+            move.ForceStop();
+        move.OverrideCurve(knockbackSpeed, knockbackCurve, Mathf.Sign(transform.position.x - other.transform.position.x));
+    
+        ResetValues();
+    }
+
+    private void OnHitEnd() {
+        if (!isLocalPlayer)
+            return;
+
+        hitstunned = false;
+        move.ResetCurves();
+
+        if (InputHandler.Instance.move.down)
+            move.StartAcceleration(InputHandler.Instance.dir);
+    }
+
+// reset all non-persistent move values at once
+    public void ResetValues() {
+        bladeCharging = false;
+        bladeReady = false;
+    }
     public void SpawnDust() {
         if (!isLocalPlayer || !grounded)
             return;
@@ -247,6 +301,7 @@ public class PlayerController : NetworkBehaviour
             if (InputHandler.Instance.dir != 0)
                 facing = (int)InputHandler.Instance.dir;
             bladeCharging = false;
+            bladeReady = false;
             animator.ResetTrigger("release");
             EndAction();
             DoRoll();
@@ -374,8 +429,36 @@ public class PlayerController : NetworkBehaviour
         hitpaused = true;
     }
 
-    public void OnDie() {
-        VFXManager.Instance.SendFloatingText("* D E A D *", transform.position, Color.white);
+    public void OnDie(int dmg, GameObject other) {
+        if (!isLocalPlayer)
+            return;
+
+        if (restPoint != null)
+            restPoint.OnInteract(this);
+
+        EndAction();
+
+        hitstunned = true;
+        dead = true;
+        stats.SetInvuln(true);
+
+        animator.SetTrigger("dead");
+
+        if (!InputHandler.Instance.move.down)
+            move.ForceStop();
+        move.OverrideCurve(deathSpeed, deathCurve, Mathf.Sign(transform.position.x - other.transform.position.x));
+    
+        ResetValues();
+    }
+
+    public void EndDie() {
+        if (!isLocalPlayer)
+            return;
+
+        move.ResetCurves();
+        move.ForceStop();
+        hitstunned = false;
+        WorldManager.Instance.SpawnCorpse(transform.position, sprite.flipX);
     }
 
 //  commands and rpcs for attaching various particle effects to the player prefab. For unattached particles

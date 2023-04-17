@@ -264,6 +264,65 @@ MonoBehaviour:
   walljumpWindow: 0.1
   walljumpSpeed: 20
   walljumpDuration: 0.15
+  knockbackSpeed: 60
+  knockbackCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -9.195976
+      outSlope: -9.195976
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.03261088
+    - serializedVersion: 3
+      time: 0.33
+      value: 0
+      inSlope: -0.01789154
+      outSlope: -0.01789154
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.15964282
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  deathSpeed: 40
+  deathCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: -1.9229137
+      outSlope: -1.9229137
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.04139073
+    - serializedVersion: 3
+      time: 0.5
+      value: 0
+      inSlope: -3.2391343
+      outSlope: -3.2391343
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.035596013
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   hitboxPrefab: {fileID: 1763554164472596795, guid: 9b0e6f2ca6216e74bbfcb13240af9f25, type: 3}
   swordPrimary: {fileID: 11400000, guid: 6afd65f7e9dd9fa4bb379830eb6caa8c, type: 2}
   swordSecondary: {fileID: 11400000, guid: 2be9fb6b38a5258498de3a7a2769092f, type: 2}
@@ -281,6 +340,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   syncMode: 0
   syncInterval: 0.1
+  player: {fileID: 7061316402069580559}
+  enemy: {fileID: 0}
   Ingenuity: 5
   Might: 5
   Precision: 5
@@ -503,7 +564,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 135561617
   m_SortingLayer: 5
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 835baa269ea656b47995876edbfc1854, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

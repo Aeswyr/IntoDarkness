@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class LevelController : MonoBehaviour
 {
-    [SerializeField] private GameObject waterline;
-    public void UpdateWaterline(float xPos) {
-        Vector3 pos = waterline.transform.position;
-        pos.x = xPos;
-        waterline.transform.position = pos;
+    [SerializeField] private GameObject parallaxHolder;
+    [SerializeField] private GameObject skyParallax;
+    public void UpdateParallax(Vector3 targetPos) {
+        var cam = Camera.main.transform.position;
+
+        Vector3 pos = parallaxHolder.transform.position;
+        pos.x = cam.x;
+        parallaxHolder.transform.position = pos;
+
+        Vector3 skyPos = skyParallax.transform.position;
+        skyPos.y = cam.y;
+        skyParallax.transform.position = skyPos;
     }
 }

@@ -7,6 +7,7 @@ public class WorldManager : NetworkSingleton<WorldManager>
 {
     [Header("EnemyPrefabs")]
     [SerializeField] private List<GameObject> enemyPrefabs;
+    [SerializeField] private List<GameObject> interactablePrefabs;
     
     List<PlayerController> players = new List<PlayerController>();
     float spawnDelay = 5;
@@ -28,7 +29,7 @@ public class WorldManager : NetworkSingleton<WorldManager>
 
         tick = (tick + 1) % (50 * (dayDuration + nightDuration));
 
-        if (Time.time - spawnTime > spawnDelay && tick > dayDuration * 50) {
+        if (Time.time - spawnTime > spawnDelay && tick > dayDuration * 0) {
             spawnTime = Time.time;
             SpawnEnemy(EnemyType.BASIC, new Vector2(Random.Range(-16, 16), 0));
         }
@@ -39,6 +40,13 @@ public class WorldManager : NetworkSingleton<WorldManager>
             return;
 
         NetworkServer.Spawn(Instantiate(enemyPrefabs[(int)type], pos, Quaternion.identity));
+    }
+
+    public GameObject SpawnCorpse(Vector3 pos, bool flipX) {
+        var corpse = Instantiate(interactablePrefabs[(int)InteractableType.CORPSE], pos, Quaternion.identity);
+        corpse.GetComponent<SpriteRenderer>().flipX = flipX;
+        NetworkServer.Spawn(corpse);
+        return corpse;
     }
 
     public void AddPlayer(PlayerController player) {
@@ -52,4 +60,8 @@ public class WorldManager : NetworkSingleton<WorldManager>
 
 public enum EnemyType {
     BASIC,
+}
+
+public enum InteractableType {
+    RESOURCE, CORPSE,
 }

@@ -5,6 +5,9 @@ using Mirror;
 
 public class StatController : NetworkBehaviour
 {
+
+    [SerializeField] private PlayerController player;
+    [SerializeField] private EnemyController enemy;
     [SerializeField] private int Ingenuity; // Skill scaling
     [SerializeField] private int Might; // Weapon scaling
     [SerializeField] private int Precision; // Luck scaling
@@ -71,9 +74,9 @@ public class StatController : NetworkBehaviour
         {
             float hitstopDuration = 0.1f;
             // hitstop on the target who was hit
-            if (TryGetComponent(out EnemyController enemy)) {
+            if (enemy != null) {
                 enemy.DoHitstop(hitstopDuration);
-            } else if (TryGetComponent(out PlayerController player)) {
+            } else if (player != null) {
                 player.DoHitstop(hitstopDuration);
             } 
             //hitstop on the source of the damage
@@ -85,10 +88,16 @@ public class StatController : NetworkBehaviour
         }
 
         if (health <= 0) {
-            if (TryGetComponent(out PlayerController player)) {
-                player.OnDie();
-            } else if (TryGetComponent(out EnemyController enemy)) {
+            if (player != null) {
+                player.OnDie(amt, hit.GetOwner());
+            } else if (enemy != null) {
                 enemy.OnDie();
+            }
+        } else if (health > 0) {
+            if (player != null) {
+                player.OnHit(amt, hit.GetOwner());
+            } else if (enemy != null) {
+                //enemy.OnDie();
             }
         }
 

@@ -7,6 +7,7 @@ public class HitboxController : MonoBehaviour
     EntityTeam team;
     HitboxData hitData;
     StatController sourceStats;
+    List<GameObject> targetsHit = new();
 
     [SerializeField] private BoxCollider2D hitbox;
 
@@ -32,6 +33,14 @@ public class HitboxController : MonoBehaviour
 
     public GameObject GetOwner() {
         return sourceStats.gameObject;
+    }
+
+    public bool CanHit(GameObject target) {
+        if (targetsHit.Contains(target))
+            return false;
+
+        targetsHit.Add(target);
+        return true;
     }
 
 
