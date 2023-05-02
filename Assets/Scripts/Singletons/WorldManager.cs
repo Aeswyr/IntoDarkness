@@ -42,10 +42,11 @@ public class WorldManager : NetworkSingleton<WorldManager>
         NetworkServer.Spawn(Instantiate(enemyPrefabs[(int)type], pos, Quaternion.identity));
     }
 
-    public GameObject SpawnCorpse(Vector3 pos, bool flipX) {
-        var corpse = Instantiate(interactablePrefabs[(int)InteractableType.CORPSE], pos, Quaternion.identity);
+    [Server] public GameObject SpawnCorpse(Vector3 pos, bool flipX, PlayerController player) {
+        GameObject corpse = Instantiate(interactablePrefabs[(int)InteractableType.CORPSE], pos, Quaternion.identity);
         corpse.GetComponent<SpriteRenderer>().flipX = flipX;
         NetworkServer.Spawn(corpse);
+        corpse.GetComponent<CorpseNodeController>().SetTarget(player);
         return corpse;
     }
 

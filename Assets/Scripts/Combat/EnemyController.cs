@@ -26,8 +26,17 @@ public class EnemyController : NetworkBehaviour
     bool hitpaused;
     float hitpauseEnd;
     public void OnDie() {
+        if (isServer)
+            NetworkServer.Destroy(gameObject);
+        else
+            SyncDie();
+    }
+
+    [Command(requiresAuthority = false)] private void SyncDie() {
         NetworkServer.Destroy(gameObject);
     }
+
+
 
     public void DoHitstop(float duration) {
         if (isServer) 
@@ -46,7 +55,9 @@ public class EnemyController : NetworkBehaviour
         }
 
         var closestPlayer = GetClosestPlayer();
-        var dist = closestPlayer.transform.position.x - transform.position.x;
+        var dist = 0 - transform.position.x;
+        if (closestPlayer != null)
+            dist = closestPlayer.transform.position.x - transform.position.x;
 
         int oldFacing = facing;
 
@@ -66,10 +77,11 @@ public class EnemyController : NetworkBehaviour
     }
 
     private PlayerController GetClosestPlayer() {
-        var target = WorldManager.Instance.GetPlayers()[0];
+        PlayerController target = null;
 
         foreach (var player in WorldManager.Instance.GetPlayers())
-            if (Mathf.Abs(transform.position.x - player.transform.position.x) < Mathf.Abs(transform.position.x - target.transform.position.x))
+            if ((target == null && !player.IsDead()) || (!player.IsDead() &&
+                Mathf.Abs(transform.position.x - player.transform.position.x) < Mathf.Abs(transform.position.x - target.transform.position.x)))
                 target = player;
 
         return target;

@@ -5,6 +5,7 @@ using Mirror;
 
 public class CorpseNodeController : NetworkBehaviour
 {
+    private PlayerController target;
     public void OnInteract(PlayerController interactor) {
         if (isServer)
             RecieveInteract();
@@ -12,11 +13,23 @@ public class CorpseNodeController : NetworkBehaviour
             SendInteract();
     }
 
-    [Command] private void SendInteract() {
+    [Command(requiresAuthority = false)] private void SendInteract() {
         RecieveInteract();
     }
 
-    [ClientRpc] private void RecieveInteract() {
+    private void RecieveInteract() {
+        if (target != null) {
+            target.SyncRevive(transform.position);
+        }
+        NetworkServer.Destroy(gameObject);
+    }
 
+    public void SetTarget(PlayerController target) {
+        this.target = target;
+    }
+
+    void FixedUpdate() {
+        if (isServer && target != null && !target.IsDead())
+            NetworkServer.Destroy(gameObject);
     }
 }

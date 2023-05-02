@@ -156,6 +156,10 @@ public class PlayerController : NetworkBehaviour
         }
 
         if (dead) {
+            if (InputHandler.Instance.interact.pressed) {
+                OnRevive(Vector3.zero);
+            }
+
             FinalizeFrame();
             return;
         }
@@ -440,6 +444,8 @@ public class PlayerController : NetworkBehaviour
 
         hitstunned = true;
         dead = true;
+        if (!isServer)
+            SyncDead(dead);
         stats.SetInvuln(true);
 
         animator.SetTrigger("dead");
@@ -458,7 +464,42 @@ public class PlayerController : NetworkBehaviour
         move.ResetCurves();
         move.ForceStop();
         hitstunned = false;
-        WorldManager.Instance.SpawnCorpse(transform.position, sprite.flipX);
+        if (isServer)
+            WorldManager.Instance.SpawnCorpse(transform.position, sprite.flipX, this);
+        else 
+            SyncDie();
+        animator.SetBool("ghosting", true);
+    }
+
+    [Command] private void SyncDie() {
+        WorldManager.Instance.SpawnCorpse(transform.position, sprite.flipX, this);
+    }
+
+    [Command] private void SyncDead(bool value) {
+        dead = value;
+    }
+
+    public void OnRevive(Vector3 pos) {
+        if (!isLocalPlayer)
+            return;
+        transform.position = pos;
+
+        dead = false;
+        if (!isServer)
+            SyncDead(dead);
+
+        stats.SetHealth(1);
+        stats.SetInvuln(false);
+
+        animator.SetBool("ghosting", false);
+    }
+
+    [Server, ClientRpc] public void SyncRevive(Vector3 pos) {
+        OnRevive(pos);
+    }
+
+    public bool IsDead() {
+        return dead;
     }
 
 //  commands and rpcs for attaching various particle effects to the player prefab. For unattached particles

@@ -13,7 +13,7 @@ public class StatController : NetworkBehaviour
     [SerializeField] private int Precision; // Luck scaling
 
     [SerializeField] private int maxHealth;
-    [SyncVar] private int health;
+    [SyncVar(hook = nameof(RefreshHealth))] private int health;
 
     [SerializeField] private int maxFocus;
     private int focus;
@@ -69,8 +69,14 @@ public class StatController : NetworkBehaviour
             flip = sprite.flipX;
         VFXManager.Instance.SyncVFX(ParticleType.HITSPARK_DEFAULT, transform.position, flip);
 
-        health -= amt;
-
+        int newHealth = health - amt;
+        SetHealth(newHealth);
+        
+        if (newHealth < 0) {
+            SetHealth(0);
+            newHealth = 0;
+        }
+        
         {
             float hitstopDuration = 0.1f;
             // hitstop on the target who was hit
@@ -87,13 +93,13 @@ public class StatController : NetworkBehaviour
             }
         }
 
-        if (health <= 0) {
+        if (newHealth <= 0) {
             if (player != null) {
                 player.OnDie(amt, hit.GetOwner());
             } else if (enemy != null) {
                 enemy.OnDie();
             }
-        } else if (health > 0) {
+        } else if (newHealth > 0) {
             if (player != null) {
                 player.OnHit(amt, hit.GetOwner());
             } else if (enemy != null) {
@@ -130,5 +136,24 @@ public class StatController : NetworkBehaviour
 
     public void SetInvuln(bool state) {
         invuln = state;
+    }
+
+    public void SetHealth(int val) {
+        if (isServer)
+            this.health = val;
+        else
+            SyncHealth(val);
+    }
+
+    [Command(requiresAuthority = false)] private void SyncHealth(int amt) {
+        health = amt;
+    }
+    private void RefreshHealth(int oldHealth, int newHealth) {
+        if (isLocalPlayer)
+            PlayerHUDManager.Instance.RefreshHealthBar(maxHealth, health);
+    }
+
+    public void OnHeal() {
+
     }
 }
