@@ -36,6 +36,7 @@ public class PlayerHUDManager : Singleton<PlayerHUDManager>
 
     [Header("Other")]
     [SerializeField] private Animator animator;
+    [SerializeField] private Image fireBar;
 
     public void RefreshHealthBar(int maxHealth, int currentHealth) {
         healthCounter.text = $"{currentHealth}/{maxHealth}";
@@ -87,6 +88,10 @@ public class PlayerHUDManager : Singleton<PlayerHUDManager>
             else
                 image.sprite = exertEmpty;
         }
+    }
+
+    public void RefreshFireBar(int maxFire, int currentFire) {
+        fireBar.fillAmount = (float)currentFire / maxFire;
     }
     
     Dictionary<ResourceCardType, GameObject> holderMap = new();

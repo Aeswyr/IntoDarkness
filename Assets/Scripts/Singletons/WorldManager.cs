@@ -13,11 +13,15 @@ public class WorldManager : NetworkSingleton<WorldManager>
     float spawnDelay = 5;
     float spawnTime;
     [SyncVar] long tick;
+
+    [SyncVar(hook = nameof(RefreshFire))] int fireLevel;
+    int maxFire = 7500; // 2.5m of fire
     [SerializeField] long dayDuration;
     [SerializeField] long nightDuration;
 
     public void Start() {
         spawnTime = -spawnDelay;
+        fireLevel = maxFire;
     }
 
     void FixedUpdate()
@@ -29,7 +33,10 @@ public class WorldManager : NetworkSingleton<WorldManager>
 
         tick = (tick + 1) % (50 * (dayDuration + nightDuration));
 
-        if (Time.time - spawnTime > spawnDelay && tick > dayDuration * 0) {
+        if (fireLevel > 0)
+            fireLevel--;
+
+        if (Time.time - spawnTime > spawnDelay && tick > dayDuration * 0/*50*/) {
             spawnTime = Time.time;
             SpawnEnemy(EnemyType.BASIC, new Vector2(Random.Range(-16, 16), 0));
         }
@@ -56,6 +63,25 @@ public class WorldManager : NetworkSingleton<WorldManager>
 
     public List<PlayerController> GetPlayers() {
         return players;
+    }
+
+    public int GetFire() {
+        return fireLevel;
+    }
+
+    public void ChangeFire(int amt) {
+        if (!isServer)
+            SyncChangeFire(amt);
+        else
+            this.fireLevel += amt;
+    }
+
+    [Command] private void SyncChangeFire(int amt) {
+        this.fireLevel += amt;
+    }
+
+    private void RefreshFire(int oldFire, int newFire) {
+        PlayerHUDManager.Instance.RefreshFireBar(maxFire, fireLevel);
     }
 }
 

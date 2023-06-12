@@ -158,6 +158,7 @@ public class PlayerController : NetworkBehaviour
         if (dead) {
             if (InputHandler.Instance.interact.pressed) {
                 OnRevive(Vector3.zero);
+                WorldManager.Instance.ChangeFire(-2000);
             }
 
             FinalizeFrame();
