@@ -1,7 +1,536 @@
 fileFormatVersion: 2
 guid: 5241666007d234749af7e63fdcd6dcdc
-DefaultImporter:
+ScriptedImporter:
+  internalIDToNameTable: []
   externalObjects: {}
+  serializedVersion: 2
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+  script: {fileID: 11500000, guid: 62a9f0aa5b59740cfbadc7e5f9823bb0, type: 3}
+  textureImporterSettings:
+    alphaSource: 1
+    mipMapMode: 0
+    enableMipMap: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+    convertToNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
+    isReadable: 0
+    streamingMipmaps: 0
+    streamingMipmapsPriority: 0
+    vTOnly: 0
+    ignoreMipmapLimit: 0
+    nPOTScale: 1
+    sRGBTexture: 1
+    spriteMode: 2
+    spriteExtrude: 1
+    spriteMeshType: 1
+    alignment: 0
+    spritePivot: {x: 0.5, y: 0.5}
+    spritePixelsToUnits: 8
+    spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+    spriteGenerateFallbackPhysicsShape: 0
+    generateCubemap: 6
+    cubemapConvolution: 0
+    seamlessCubemap: 0
+    alphaIsTransparency: 1
+    spriteTessellationDetail: -1
+    textureType: 8
+    textureShape: 1
+    singleChannelComponent: 0
+    flipbookRows: 0
+    flipbookColumns: 0
+    ignorePngGamma: 0
+    cookieMode: 0
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+    normalMap: 0
+    textureFormat: 0
+    maxTextureSize: 0
+    lightmap: 0
+    compressionQuality: 0
+    linearTexture: 0
+    grayScaleToAlpha: 0
+    rGBM: 0
+    cubemapConvolutionSteps: 0
+    cubemapConvolutionExponent: 0
+    maxTextureSizeSet: 0
+    compressionQualitySet: 0
+    textureFormatSet: 0
+    applyGammaDecoding: 0
+  previousAsepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 0
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  asepriteImporterSettings:
+    fileImportMode: 1
+    importHiddenLayers: 0
+    layerImportMode: 1
+    defaultPivotSpace: 0
+    defaultPivotAlignment: 0
+    customPivotPosition: {x: 0.5, y: 0.5}
+    spritePadding: 0
+    generateModelPrefab: 1
+    generateAnimationClips: 1
+    addSortingGroup: 1
+    addShadowCasters: 0
+  importFileNodeState: 1
+  platformSettingsDirtyTick: 638549320244872787
+  textureAssetName: 
+  singleSpriteImportData:
+  - name: 
+    originalName: 
+    pivot: {x: 0, y: 0}
+    alignment: 0
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 0
+      y: 0
+      width: 0
+      height: 0
+    spriteID: 
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 0, y: 0}
+  animatedSpriteImportData:
+  - name: vfx_pickup_Frame_0
+    originalName: 
+    pivot: {x: 0, y: 0.7777778}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 21
+      width: 1
+      height: 9
+    spriteID: c83b2def0dd0e734d93f5af8e741ebe9
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 21}
+  - name: vfx_pickup_Frame_1
+    originalName: 
+    pivot: {x: 0.33333334, y: 0.5555556}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 4
+      width: 3
+      height: 9
+    spriteID: 4fe39f3e38b18334095935c2fdfe4d33
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 32, y: 4}
+  - name: vfx_pickup_Frame_2
+    originalName: 
+    pivot: {x: 0.4, y: 0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 38
+      width: 5
+      height: 9
+    spriteID: 7ff5c0af402822e4695979da2709df4f
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 38}
+  - name: vfx_pickup_Frame_3
+    originalName: 
+    pivot: {x: 0.42857146, y: 0.33333334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 4
+      width: 7
+      height: 9
+    spriteID: ca696c69ef457d840bdfcfea277c5407
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 4}
+  - name: vfx_pickup_Frame_4
+    originalName: 
+    pivot: {x: 0.4, y: 0.5555556}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 19
+      y: 4
+      width: 5
+      height: 9
+    spriteID: b178ce3c6e0666445afd769ae6a87a4c
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 19, y: 4}
+  - name: vfx_pickup_Frame_5
+    originalName: 
+    pivot: {x: 0.33333334, y: 0.5555556}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 21
+      width: 3
+      height: 9
+    spriteID: 33290ec7823c92e42afb41fcf5cb3347
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 32, y: 21}
+  - name: vfx_pickup_Frame_6
+    originalName: 
+    pivot: {x: 0, y: 0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 38
+      width: 1
+      height: 9
+    spriteID: 34af0b04fc62e0242b816925805c71b7
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 38}
+  - name: vfx_pickup_Frame_7
+    originalName: 
+    pivot: {x: 0.33333334, y: 0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 32
+      y: 38
+      width: 3
+      height: 9
+    spriteID: 50ca39cbaf751f84da7fec23697bbcd6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 32, y: 38}
+  - name: vfx_pickup_Frame_8
+    originalName: 
+    pivot: {x: 0.4, y: 0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 19
+      y: 21
+      width: 5
+      height: 9
+    spriteID: 84f332d0aa8de7c45bfc334d15107c58
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 19, y: 21}
+  - name: vfx_pickup_Frame_9
+    originalName: 
+    pivot: {x: 0.42857146, y: 0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 21
+      width: 7
+      height: 9
+    spriteID: f604220748f45e742961c2d9d7bf0fad
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 21}
+  - name: vfx_pickup_Frame_10
+    originalName: 
+    pivot: {x: 0.4, y: 0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 19
+      y: 38
+      width: 5
+      height: 9
+    spriteID: eebd0796b323aac4988e25f09c9c58c6
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 19, y: 38}
+  - name: vfx_pickup_Frame_11
+    originalName: 
+    pivot: {x: 0.33333334, y: 0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 43
+      y: 4
+      width: 3
+      height: 9
+    spriteID: 95dddf149902a6443a28fb907b955e42
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 43, y: 4}
+  - name: vfx_pickup_Frame_12
+    originalName: 
+    pivot: {x: 0, y: 0.44444445}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    rect:
+      serializedVersion: 2
+      x: 54
+      y: 4
+      width: 1
+      height: 9
+    spriteID: e1bd50a0bbaabb04fb14ed666c67a5c8
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 54, y: 4}
+  spriteSheetImportData: []
+  asepriteLayers:
+  - layerIndex: 0
+    guid: 774856951
+    name: vfx_pickup
+    layerFlags: 0
+    layerType: 0
+    blendMode: 0
+    cells:
+    - name: vfx_pickup_Frame_0
+      frameIndex: 0
+      cellRect:
+        x: 8
+        y: 1
+        width: 1
+        height: 9
+      spriteId: c83b2def0dd0e734d93f5af8e741ebe9
+    - name: vfx_pickup_Frame_1
+      frameIndex: 1
+      cellRect:
+        x: 7
+        y: 3
+        width: 3
+        height: 9
+      spriteId: 4fe39f3e38b18334095935c2fdfe4d33
+    - name: vfx_pickup_Frame_2
+      frameIndex: 2
+      cellRect:
+        x: 6
+        y: 4
+        width: 5
+        height: 9
+      spriteId: 7ff5c0af402822e4695979da2709df4f
+    - name: vfx_pickup_Frame_3
+      frameIndex: 3
+      cellRect:
+        x: 5
+        y: 5
+        width: 7
+        height: 9
+      spriteId: ca696c69ef457d840bdfcfea277c5407
+    - name: vfx_pickup_Frame_4
+      frameIndex: 4
+      cellRect:
+        x: 6
+        y: 3
+        width: 5
+        height: 9
+      spriteId: b178ce3c6e0666445afd769ae6a87a4c
+    - name: vfx_pickup_Frame_5
+      frameIndex: 5
+      cellRect:
+        x: 7
+        y: 3
+        width: 3
+        height: 9
+      spriteId: 33290ec7823c92e42afb41fcf5cb3347
+    - name: vfx_pickup_Frame_6
+      frameIndex: 6
+      cellRect:
+        x: 8
+        y: 4
+        width: 1
+        height: 9
+      spriteId: 34af0b04fc62e0242b816925805c71b7
+    - name: vfx_pickup_Frame_7
+      frameIndex: 7
+      cellRect:
+        x: 7
+        y: 4
+        width: 3
+        height: 9
+      spriteId: 50ca39cbaf751f84da7fec23697bbcd6
+    - name: vfx_pickup_Frame_8
+      frameIndex: 8
+      cellRect:
+        x: 6
+        y: 4
+        width: 5
+        height: 9
+      spriteId: 84f332d0aa8de7c45bfc334d15107c58
+    - name: vfx_pickup_Frame_9
+      frameIndex: 9
+      cellRect:
+        x: 5
+        y: 4
+        width: 7
+        height: 9
+      spriteId: f604220748f45e742961c2d9d7bf0fad
+    - name: vfx_pickup_Frame_10
+      frameIndex: 10
+      cellRect:
+        x: 6
+        y: 4
+        width: 5
+        height: 9
+      spriteId: eebd0796b323aac4988e25f09c9c58c6
+    - name: vfx_pickup_Frame_11
+      frameIndex: 11
+      cellRect:
+        x: 7
+        y: 4
+        width: 3
+        height: 9
+      spriteId: 95dddf149902a6443a28fb907b955e42
+    - name: vfx_pickup_Frame_12
+      frameIndex: 12
+      cellRect:
+        x: 8
+        y: 4
+        width: 1
+        height: 9
+      spriteId: e1bd50a0bbaabb04fb14ed666c67a5c8
+    linkedCells: []
+    parentIndex: -1
+  platformSettings:
+  - name: DefaultTexturePlatform
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Standalone
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  - name: Server
+    overridden: 0
+    ignorePlatformSupport: 0
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    androidETC2FallbackOverride: 0
+  secondarySpriteTextures: []
+  spritePackingTag: 
+  canvasSize: {x: 16, y: 16}

@@ -46,7 +46,7 @@ public class VFXManager : NetworkSingleton<VFXManager>
         animController["particle"] = anims[(int)type];
         animator.runtimeAnimatorController = animController;
 
-        particle.GetComponent<DestroyAfterDelay>().Init(anims[(int)type].length);
+        particle.GetComponent<DestroyAfterDelay>().Init(anims[(int)type].length - 0.1f);
 
         var sprite = particle.GetComponent<SpriteRenderer>();
         sprite.flipX = flip;

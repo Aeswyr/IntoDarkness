@@ -1,20 +1,31 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Cinemachine;
+
 
 public class LevelController : MonoBehaviour
 {
-    [SerializeField] private GameObject parallaxHolder;
-    [SerializeField] private GameObject skyParallax;
-    public void UpdateParallax(Vector3 targetPos) {
+    [SerializeField] private GameObject parallax;
+    [SerializeField] private GameObject parallaxNoY;
+    private UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera pixelPerfect;
+    void Start() {
+        pixelPerfect = Camera.main.GetComponent<UnityEngine.Experimental.Rendering.Universal.PixelPerfectCamera>();
+        CinemachineCore.CameraUpdatedEvent.AddListener(UpdateParallax);
+    }
+    public void UpdateParallax(CinemachineBrain arg0) {
         var cam = Camera.main.transform.position;
+        cam.z = 0;
+        cam = pixelPerfect.RoundToPixel(cam);
 
-        Vector3 pos = parallaxHolder.transform.position;
+        parallax.transform.localPosition = cam;
+
+        Vector3 pos = parallaxNoY.transform.localPosition;
         pos.x = cam.x;
-        parallaxHolder.transform.position = pos;
+        parallaxNoY.transform.localPosition = pos;
+    }
 
-        Vector3 skyPos = skyParallax.transform.position;
-        skyPos.y = cam.y;
-        skyParallax.transform.position = skyPos;
+    public void LateUpdate() {
+
     }
 }

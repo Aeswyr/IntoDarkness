@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2482371320915038569}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-3040489806435372795
 MonoBehaviour:
@@ -53,6 +53,7 @@ MonoBehaviour:
   interactablePrefabs:
   - {fileID: 6524466895201048645, guid: 49c2f7f5a3e03e746b2491c85d1e1902, type: 3}
   - {fileID: 6524466895201048645, guid: 20aa9443f4055ac4d82d9c8630efd8da, type: 3}
+  sun: {fileID: 0}
   dayDuration: 210
   nightDuration: 90
 --- !u!114 &301642275762127614
@@ -71,12 +72,12 @@ MonoBehaviour:
   syncInterval: 0.1
   template: {fileID: 3399806626592431808, guid: e3ff99f656971cb45b474e196c4377a1, type: 3}
   anims:
-  - {fileID: 7400000, guid: f1613e74022726b4eac8cb0e7b77d144, type: 2}
-  - {fileID: 7400000, guid: 0eb5698f4632b134aa6a8473ede325a1, type: 2}
-  - {fileID: 7400000, guid: cf3bae339bbaa094a93107384bff8988, type: 2}
-  - {fileID: 7400000, guid: 4145428ab7941a142a73d0d4ca65a4e2, type: 2}
-  - {fileID: 7400000, guid: eb4c818486b80c34cae94e7f3c12c9ab, type: 2}
-  - {fileID: 7400000, guid: eb76d27f7095d354694cea44392cba72, type: 2}
+  - {fileID: -1300594986908038686, guid: f63f56d02f9fdcd4d933b8da9c057c8b, type: 3}
+  - {fileID: 2016076567115708239, guid: 915477b54bddf31449212fbfc829c9ca, type: 3}
+  - {fileID: -1424831918371646271, guid: 26dba0fec8b258e4c84a622d499ee141, type: 3}
+  - {fileID: -218488023650193649, guid: 5f741209f9d3bf045b0194e266e7fd52, type: 3}
+  - {fileID: 7116160738164424399, guid: 5241666007d234749af7e63fdcd6dcdc, type: 3}
+  - {fileID: -5385436979190906649, guid: 14e6f47f80dfc174898a5c5c5a506a24, type: 3}
   particles:
   - {fileID: 2529229389930389568, guid: 50d4ec40ba7716d498a09051d2a70717, type: 3}
   textPrefab: {fileID: 6064983318388810870, guid: a177040647364e7478dd004afaec0846, type: 3}

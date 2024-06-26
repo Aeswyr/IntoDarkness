@@ -9,6 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: WaterReflection
   m_Shader: {fileID: -6465566751694194690, guid: b2f3f1d57d894d348918abf5746121a7, type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -17,6 +19,7 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -41,6 +44,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2D_89284fb244624406b63a3aa7ff018e3c_Texture_1:
+        m_Texture: {fileID: 2800000, guid: b48af268837bb8f4a82e294ef1090539, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2D_89284fb244624406b63a3aa7ff018e3c_Texture_1_Texture2D:
         m_Texture: {fileID: 2800000, guid: b48af268837bb8f4a82e294ef1090539, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -77,3 +84,16 @@ Material:
     - _ScreenSize: {r: 320, g: 180, b: 0, a: 0}
     - _WaterColor: {r: 0.60860026, g: 0.57924527, b: 1, a: 1}
   m_BuildTextureStacks: []
+--- !u!114 &2507464634866697927
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 7

@@ -79,7 +79,7 @@ public class PlayerController : NetworkBehaviour
     private int wallDir;
     private bool wallJumped;
 
-
+    private int hitboxId;
     private int weapon;
     void Start() {
         WorldManager.Instance.AddPlayer(this);
@@ -206,8 +206,6 @@ public class PlayerController : NetworkBehaviour
 
             if (oldFacing != facing)
                 SendFacing(facing == -1);
-
-            GameManager.Instance.GetLevel().UpdateParallax(transform.position);
         }
 
         FinalizeFrame();
@@ -287,6 +285,7 @@ public class PlayerController : NetworkBehaviour
         if (weapon != 0)
             return false;
         if (!acting && InputHandler.Instance.primary.pressed) {
+            hitboxId = 0;
             actionID = 1;
             StartAction();
             if (grounded) {
@@ -314,6 +313,7 @@ public class PlayerController : NetworkBehaviour
         } else if ((bladeCharging || bladeReady) && InputHandler.Instance.secondary.released) {
                 if (InputHandler.Instance.dir != 0)
                     facing = (int)InputHandler.Instance.dir;
+                hitboxId = 1;
                 animator.SetTrigger("release");
                 return true;
         } else if (bladeReady || bladeCharging) {
@@ -395,7 +395,7 @@ public class PlayerController : NetworkBehaviour
         }
     }
 
-    private void CreateActiveHitbox(int type) {
+    private void CreateActiveHitbox() {
         DestroyActiveHitbox();
         void CreateHitbox(Vector3 position, Vector2 size, HitboxData data) {
             activeHitbox = Instantiate(hitboxPrefab, position, Quaternion.identity);
@@ -403,7 +403,7 @@ public class PlayerController : NetworkBehaviour
             hitbox.InitializeHitbox(size, EntityTeam.PLAYER, data, stats);
             activeHitbox.transform.SetParent(transform);
         }
-        switch (type) {
+        switch (hitboxId) {
             case 0:
                 CreateHitbox(transform.position + 2 * facing * Vector3.right, new Vector2(4, 3), swordPrimary);
                 break;

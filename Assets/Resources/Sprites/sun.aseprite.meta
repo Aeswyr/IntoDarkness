@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f63f56d02f9fdcd4d933b8da9c057c8b
+guid: b5562bca131a7b14d84839b8fc5f299a
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -95,7 +95,7 @@ ScriptedImporter:
     addSortingGroup: 1
     addShadowCasters: 0
   importFileNodeState: 1
-  platformSettingsDirtyTick: 638549320244872787
+  platformSettingsDirtyTick: 638549319431114782
   textureAssetName: 
   singleSpriteImportData:
   - name: 
@@ -119,58 +119,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: vfx_dust_small_Frame_0
+  - name: sun
     originalName: 
-    pivot: {x: 0.45454547, y: 2.2857144}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 40
-      y: 4
-      width: 11
-      height: 7
-    spriteID: ed7ece919cb1a2741b475c55c7801d69
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 40, y: 4}
-  - name: vfx_dust_small_Frame_1
-    originalName: 
-    pivot: {x: 0.72727275, y: 1.4545455}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 24
-      width: 11
-      height: 11
-    spriteID: e6f1b126036cf354d975eda6ce908961
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 24}
-  - name: vfx_dust_small_Frame_2
-    originalName: 
-    pivot: {x: 0.90909094, y: 1.3333334}
+    pivot: {x: 0.5, y: 0.5}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 11
-      height: 12
-    spriteID: b5e36c7d78dd90141ac8e18b7caf58c5
+      width: 64
+      height: 64
+    spriteID: 9393320b91b763a4193742bcfdf6e6cf
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -179,151 +139,23 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: vfx_dust_small_Frame_3
-    originalName: 
-    pivot: {x: 1.3333334, y: 1.3333334}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 23
-      y: 4
-      width: 9
-      height: 12
-    spriteID: 23d859640f1ab814b8dabea5618b4be6
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 23, y: 4}
-  - name: vfx_dust_small_Frame_4
-    originalName: 
-    pivot: {x: 1.3000001, y: 1.3333334}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 43
-      width: 10
-      height: 12
-    spriteID: af87b296f51fc484c97647f4fa655813
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 43}
-  - name: vfx_dust_small_Frame_5
-    originalName: 
-    pivot: {x: 1.4285715, y: 1.4545455}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 23
-      y: 24
-      width: 7
-      height: 11
-    spriteID: aedcc4cecf2a5754e96c092565119eea
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 23, y: 24}
-  - name: vfx_dust_small_Frame_6
-    originalName: 
-    pivot: {x: 1.8000001, y: 3}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 23
-      y: 43
-      width: 5
-      height: 3
-    spriteID: aad162c686e7bf949a5dcbe80273674a
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 23, y: 43}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: -204276739
-    name: vfx_dust_small
+    guid: 1911715944
+    name: sun
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: vfx_dust_small_Frame_0
+    - name: sun
       frameIndex: 0
       cellRect:
-        x: 11
+        x: 0
         y: 0
-        width: 11
-        height: 7
-      spriteId: ed7ece919cb1a2741b475c55c7801d69
-    - name: vfx_dust_small_Frame_1
-      frameIndex: 1
-      cellRect:
-        x: 8
-        y: 0
-        width: 11
-        height: 11
-      spriteId: e6f1b126036cf354d975eda6ce908961
-    - name: vfx_dust_small_Frame_2
-      frameIndex: 2
-      cellRect:
-        x: 6
-        y: 0
-        width: 11
-        height: 12
-      spriteId: b5e36c7d78dd90141ac8e18b7caf58c5
-    - name: vfx_dust_small_Frame_3
-      frameIndex: 3
-      cellRect:
-        x: 4
-        y: 0
-        width: 9
-        height: 12
-      spriteId: 23d859640f1ab814b8dabea5618b4be6
-    - name: vfx_dust_small_Frame_4
-      frameIndex: 4
-      cellRect:
-        x: 3
-        y: 0
-        width: 10
-        height: 12
-      spriteId: af87b296f51fc484c97647f4fa655813
-    - name: vfx_dust_small_Frame_5
-      frameIndex: 5
-      cellRect:
-        x: 6
-        y: 0
-        width: 7
-        height: 11
-      spriteId: aedcc4cecf2a5754e96c092565119eea
-    - name: vfx_dust_small_Frame_6
-      frameIndex: 6
-      cellRect:
-        x: 7
-        y: 7
-        width: 5
-        height: 3
-      spriteId: aad162c686e7bf949a5dcbe80273674a
+        width: 64
+        height: 64
+      spriteId: 9393320b91b763a4193742bcfdf6e6cf
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -365,4 +197,4 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 64, y: 64}
